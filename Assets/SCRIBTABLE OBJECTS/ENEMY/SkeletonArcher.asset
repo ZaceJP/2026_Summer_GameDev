@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bbb199cca8d7b499cf2fc6610c25f3, type: 3}
   m_Name: SkeletonArcher
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   viewDistance: 12
   attackRange: 8
   damage: 2
