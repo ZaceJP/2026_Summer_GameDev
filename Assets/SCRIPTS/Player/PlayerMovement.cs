@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector3 moveDirection;
 
+    private bool canMove = true;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update() 
     {
+        if (!canMove) return;
+
         moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
@@ -29,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.forward = moveDirection;
         }
+    }
+    public void EnableMovement(bool value)
+    {
+        canMove = value;
     }
 
 }

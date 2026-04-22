@@ -10,8 +10,13 @@ public class EnemyController : MonoBehaviour
 
     private GameObject modelInstance;
     private CharacterController controller;
+
+    private Room room;
+
     private void Start()
     {
+
+        room = GetComponentInParent<Room>();
         controller = GetComponent<CharacterController>();
 
         currentHealth = data.maxHealth;
@@ -91,12 +96,14 @@ public class EnemyController : MonoBehaviour
             if (ph != null)
             {
                 ph.TakeDamage(data.damage);
+                Debug.Log("Enemy attacked player for " + data.damage + " damage!");
             }
         }
     }
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        Debug.Log("Enemy HP: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -106,6 +113,11 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
+        if (room != null)
+        {
+            room.OnEnemyDied();
+        }
+
         Destroy(gameObject);
     }
 
