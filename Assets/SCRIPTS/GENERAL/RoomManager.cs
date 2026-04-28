@@ -4,14 +4,11 @@ using System.Collections;
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
-
     public GameObject[] roomPrefabs;
     public GameObject bossRoomPrefab;
-
     private GameObject currentRoom;
     private int roomCount = 0;
     public int roomsBeforeBoss = 5;
-
     private GameObject player;
 
     void Awake()
@@ -21,7 +18,6 @@ public class RoomManager : MonoBehaviour
 
     void Start()
     {
-        // For the very first room, we spawn everything
         SpawnInitialRoom();
     }
 
@@ -31,69 +27,72 @@ public class RoomManager : MonoBehaviour
         SpawnPlayerAtCurrentRoom();
     }
 
-    // This handles just the Room Instantiation logic
     void SpawnRoomObject()
     {
-        GameObject roomToSpawn;
-
-        if (roomCount >= roomsBeforeBoss)
-        {
-            roomToSpawn = bossRoomPrefab;
-        }
-        else
-        {
-            int index = Random.Range(0, roomPrefabs.Length);
-            roomToSpawn = roomPrefabs[index];
-        }
+        GameObject roomToSpawn = roomCount >= roomsBeforeBoss
+            ? bossRoomPrefab
+            : roomPrefabs[Random.Range(0, roomPrefabs.Length)];
 
         currentRoom = Instantiate(roomToSpawn, Vector3.zero, Quaternion.identity);
         roomCount++;
     }
 
-    // Logic to either create the player or just move them
     void SpawnPlayerAtCurrentRoom()
     {
         SpawnPoint spawn = currentRoom.GetComponentInChildren<SpawnPoint>();
 
+        if (spawn == null)
+        {
+            Debug.LogError("RoomManager: No SpawnPoint found in room!");
+            return;
+        }
+
         if (player == null)
         {
-            GameObject prefab = GetPlayerPrefab();
-            player = Instantiate(prefab, spawn.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            // If the player already exists, we use the coroutine to move them safely
-            StartCoroutine(MovePlayerToSpawn(spawn.transform.position));
+            player = Instantiate(GetPlayerPrefab(), spawn.transform.position, Quaternion.identity);
         }
     }
 
     public void LoadNextRoom()
     {
-        Destroy(currentRoom);
-        SpawnRoomObject();
-        SpawnPlayerAtCurrentRoom();
+        StartCoroutine(TransitionToNextRoom());
     }
 
-    IEnumerator MovePlayerToSpawn(Vector3 targetPosition)
+    IEnumerator TransitionToNextRoom()
     {
-        PlayerMovement movement = player.GetComponent<PlayerMovement>();
-        CharacterController cc = player.GetComponent<CharacterController>();
-
-        // 1. Disable movement logic and the CharacterController physics
+        PlayerMovement movement = player?.GetComponent<PlayerMovement>();
+        CharacterController cc = player?.GetComponent<CharacterController>();
         if (movement != null) movement.EnableMovement(false);
         if (cc != null) cc.enabled = false;
 
-        // 2. Wait for the end of the frame to ensure the controller is truly disabled
-        yield return new WaitForEndOfFrame();
-
-        // 3. Move player
-        player.transform.position = targetPosition;
-        Debug.Log("Player moved to: " + targetPosition);
-
-        // 4. Wait one more frame for the Transform to sync
         yield return null;
 
-        // 5. Re-enable
+        Destroy(currentRoom);
+        SpawnRoomObject();
+
+        SpawnPoint spawn = currentRoom.GetComponentInChildren<SpawnPoint>();
+        if (spawn == null)
+        {
+            Debug.LogError("RoomManager: No SpawnPoint in new room!");
+            if (cc != null) cc.enabled = true;
+            if (movement != null) movement.EnableMovement(true);
+            yield break;
+        }
+
+        Debug.Log("SpawnPoint world position: " + spawn.transform.position);
+        Debug.Log("Player position BEFORE teleport: " + player.transform.position);
+
+        player.transform.position = spawn.transform.position;
+
+        yield return null;
+
+        Debug.Log("Player position AFTER teleport: " + player.transform.position);
+
+        Debug.Log("SpawnPoint found on: " + spawn.gameObject.name +
+          " | parent: " + spawn.transform.parent?.name +
+          " | local pos: " + spawn.transform.localPosition +
+          " | world pos: " + spawn.transform.position);
+
         if (cc != null) cc.enabled = true;
         if (movement != null) movement.EnableMovement(true);
     }

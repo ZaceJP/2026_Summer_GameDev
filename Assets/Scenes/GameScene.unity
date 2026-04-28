@@ -269,9 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e61cb563f961d343ad613189c163e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  offset: {x: 0, y: 10, z: -10}
+  offset: {x: 0, y: 12, z: -7}
   followSpeed: 5
+  lookAheadDistance: 3
+  lookAheadSpeed: 2
+  lookAheadReturnSpeed: 1
 --- !u!1 &385160494
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +304,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1585251467}
+  - {fileID: 606040422}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
@@ -425,6 +428,51 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &606040421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606040422}
+  - component: {fileID: 606040423}
+  m_Layer: 0
+  m_Name: PlayerTransition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &606040422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606040421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 385160495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &606040423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606040421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5b2671af76c584ebefad615160b234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &766627122
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +564,7 @@ GameObject:
   - component: {fileID: 1585251467}
   - component: {fileID: 1585251468}
   m_Layer: 0
-  m_Name: ROOM GENERATOR
+  m_Name: DUNGEON GENERATOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,14 +594,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1585251466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 812180117c925374692c23f11e6d6de8, type: 3}
+  m_Script: {fileID: 11500000, guid: 19c3071c40f897645823e6791210200b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPrefabs:
-  - {fileID: 4344407567171454369, guid: 647ffb496de7df145b8c293c52a20c33, type: 3}
-  - {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
-  bossRoomPrefab: {fileID: 0}
-  roomsBeforeBoss: 5
+  normalRoomPrefabs:
+  - {fileID: 4344407567171454369, guid: bdb9bb454dca4054491b9a35b88085a1, type: 3}
+  bossRoomPrefab: {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
+  startRoomPrefab: {fileID: 4344407567171454369, guid: 647ffb496de7df145b8c293c52a20c33, type: 3}
+  totalRooms: 5
+  roomSpacing: 100
+  heroSelection: {fileID: 11400000, guid: b6a544c6bd28fe7489b212941dceddbe, type: 2}
 --- !u!1 &1719747028
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 9049756890090921536}
   - component: {fileID: 3786588842603530846}
   - component: {fileID: 4434889137958538371}
-  - component: {fileID: 6291319173415531641}
   - component: {fileID: 8557200277536286687}
   - component: {fileID: 5982202555859472674}
   m_Layer: 0
@@ -215,20 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad956931904dc64d9c1309643c92439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
---- !u!114 &6291319173415531641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4551427650568944653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c62ff6125b36d9438d63ab996ef9438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
+  moveSpeed: 5
 --- !u!114 &8557200277536286687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,9 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e574f62802ce994982afb8a767a38c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slashEffectPrefab: {fileID: 2892878016725166904, guid: e1a327ce695e08c49b9b6e39100c8173, type: 3}
-  slashLifetime: 0.2
-  attackOffset: 0.5
+  attackData: {fileID: 11400000, guid: c0c290e0c57c569499364d1c2f9c1933, type: 2}
 --- !u!114 &5982202555859472674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +240,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af793fe2b57b3d4789376d29ce5b80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 20
+  currentHealth: 0
+  moveSpeed: 5
   baseDamage: 5
-  attackSpeed: 5
+  attackSpeed: 3
   attackRange: 3
   damageMultiplier: 1
+  speedMultiplier: 1
+  attackSpeedMultiplier: 1
+  rangeMultiplier: 1

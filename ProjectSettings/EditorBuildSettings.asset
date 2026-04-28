@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 5c5d58224f0e5ab479f6333311b0f7f2
   - enabled: 1
+    path: Assets/Scenes/HeroSelect.unity
+    guid: 7219c1e75fe23ad4fb5bec50f0825e6f
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

@@ -483,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5390b9bb90cdb4a40b0d7cf532c594e6, type: 2}
   player: {fileID: 0}
+  attackData: {fileID: 11400000, guid: b8cf932a96a34de4f912d03a1843a03c, type: 2}
 --- !u!143 &481463998258756834
 CharacterController:
   m_ObjectHideFlags: 0

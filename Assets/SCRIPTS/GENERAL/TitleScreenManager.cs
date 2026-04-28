@@ -29,7 +29,7 @@ public class TitleScreenManager : MonoBehaviour
             MusicManager.Instance.PlaySFX(MusicManager.Instance.confirmSound);
 
         // Load next scene
-        SceneManager.LoadScene("GameScene"); // change to your first playable scene
+        SceneManager.LoadScene("HeroSelect"); // change to your first playable scene
     }
 
     private void OnOptionsPressed()

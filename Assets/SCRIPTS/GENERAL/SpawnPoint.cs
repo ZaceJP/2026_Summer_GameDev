@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    // just a marker
+    public Direction direction; // which wall this spawn point belongs to
 }

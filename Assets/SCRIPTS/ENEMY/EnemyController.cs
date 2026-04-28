@@ -7,120 +7,104 @@ public class EnemyController : MonoBehaviour
 
     private float lastAttackTime;
     private int currentHealth;
-
-    private GameObject modelInstance;
     private CharacterController controller;
-
-    private Room room;
+    private DungeonRoom room;
 
     private void Start()
     {
-
-        room = GetComponentInParent<Room>();
+        room = GetComponentInParent<DungeonRoom>();
         controller = GetComponent<CharacterController>();
-
         currentHealth = data.maxHealth;
-
-        if (data.modelPrefab == null ) 
-        {
-            modelInstance = Instantiate(data.modelPrefab, transform);
-        }
-
-        if (data.animator != null && modelInstance != null) 
-        {
-            Animator anim = modelInstance.GetComponent<Animator>();
-            if (anim != null) 
-            {
-                anim.runtimeAnimatorController = data.animator;
-            }
-        }
 
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) player = p.transform;
         }
-
-
     }
+
     private void Update()
     {
-        if (player == null) return;
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) player = p.transform;
+            else return;
+        }
 
         float distance = Vector3.Distance(transform.position, player.position);
+        float attackRange = data.attackData != null ? data.attackData.attackRange : 2f;
 
-        //Check if player is in sight range
         if (distance <= data.viewDistance)
         {
-            if (distance > data.attackRange)
-            {
+            if (distance > attackRange)
                 MoveTowardsPlayer();
-            }
             else
-            {
                 TryAttack();
-            }
-
         }
-        
     }
 
     void MoveTowardsPlayer()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = (player.position - transform.position);
         direction.y = 0;
         direction = direction.normalized;
 
-        // Stop if wall in front
-        if (Physics.Raycast(transform.position, direction, 0.6f))
+        int wallMask = LayerMask.GetMask("Default");
+        if (Physics.Raycast(transform.position, direction, 0.6f, wallMask))
             return;
 
         Vector3 move = direction * data.moveSpeed;
-        move.y = -1f; // keep grounded
-
+        move.y = -1f;
         controller.Move(move * Time.deltaTime);
 
         if (direction != Vector3.zero)
-        {
             transform.forward = direction;
-        }
     }
 
     void TryAttack()
     {
-        if (Time.time >= lastAttackTime + data.attackCooldown)
+        if (data.attackData == null) return;
+
+        if (Time.time < lastAttackTime + data.attackData.cooldown) return;
+        lastAttackTime = Time.time;
+
+        // Ranged
+        if (data.attackData.attackType == AttackType.Projectile
+            && data.attackData.projectileData?.projectilePrefab != null)
         {
-            lastAttackTime = Time.time;
+            Vector3 dir = (player.position - transform.position);
+            dir.y = 0;
+            dir.Normalize();
 
-            PlayerHealth ph = player.GetComponent<PlayerHealth>();
+            Vector3 spawnPos = transform.position + dir * 0.6f + Vector3.up * 0.5f;
+            GameObject obj = Instantiate(data.attackData.projectileData.projectilePrefab,
+                                         spawnPos, Quaternion.LookRotation(dir));
+            Projectile p = obj.AddComponent<Projectile>();
+            p.Init(data.attackData.projectileData, dir, "Player", data.attackData.damage);
+            return;
+        }
 
-            if (ph != null)
-            {
-                ph.TakeDamage(data.damage);
-                Debug.Log("Enemy attacked player for " + data.damage + " damage!");
-            }
+        // Melee
+        PlayerStats stats = player.GetComponent<PlayerStats>();
+        if (stats != null)
+        {
+            stats.TakeDamage(data.attackData.damage);
+            Debug.Log("Enemy hit player for " + data.attackData.damage);
         }
     }
+
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        Debug.Log("Enemy HP: " + currentHealth);
-
+        Debug.Log($"Enemy HP: {currentHealth} / {data.maxHealth}");
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     void Die()
     {
-        if (room != null)
-        {
-            room.OnEnemyDied();
-        }
-
+        room?.OnEnemyDied();
         Destroy(gameObject);
     }
-
-   
-
 }

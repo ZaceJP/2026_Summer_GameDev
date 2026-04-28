@@ -14,10 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   viewDistance: 12
-  attackRange: 8
-  damage: 2
-  attackCooldown: 2
   maxHealth: 10
+  attackData: {fileID: 11400000, guid: b8cf932a96a34de4f912d03a1843a03c, type: 2}
   modelPrefab: {fileID: 8503890071833200495, guid: 5732e5809068e8b41be568b6f090b4eb, type: 3}
   animator: {fileID: 0}
-  isRanged: 1

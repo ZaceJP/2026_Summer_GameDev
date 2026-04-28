@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832ee8ada23a1fd45add05ed0b6fe977, type: 3}
+  m_Name: Arrowattack
+  m_EditorClassIdentifier: 
+  speed: 12
+  lifetime: 3
+  hitRadius: 0.3
+  piercing: 0
+  projectilePrefab: {fileID: 5933582106747766449, guid: 096b0a96e9147244cba58c99c1f638c4, type: 3}
+  impactVFXPrefab: {fileID: 2892878016725166904, guid: e1a327ce695e08c49b9b6e39100c8173, type: 3}
+  impactVFXLifetime: 0.5
