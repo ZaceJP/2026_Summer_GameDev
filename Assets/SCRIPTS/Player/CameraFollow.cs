@@ -50,4 +50,11 @@ public class CameraFollow : MonoBehaviour
         Vector3 targetPosition = target.position + offset + currentLookAhead;
         transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
     }
+
+    public void SnapToTarget()
+    {
+        if (target == null) return;
+        transform.position = target.position + offset;
+        currentLookAhead = Vector3.zero;
+    }
 }

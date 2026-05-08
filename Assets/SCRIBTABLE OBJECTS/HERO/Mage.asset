@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   cooldown: 0.5
-  meleeRange: 2
+  attackRange: 2
+  damage: 10
   meleeOffset: 1.2
   slashVFXPrefab: {fileID: 0}
   slashVFXLifetime: 0.3
   projectileData: {fileID: 11400000, guid: a4396394fbf519443b009aeb19a50851, type: 2}
-  projectileCount: 1
+  projectileCount: 100
   spreadAngle: 15
