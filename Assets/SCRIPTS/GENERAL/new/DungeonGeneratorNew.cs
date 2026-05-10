@@ -21,6 +21,12 @@ public class DungeonGeneratorNew : MonoBehaviour
     public GameObject startRoomPrefab;
     public GameObject bossRoomPrefab;
 
+    [Header("Special Dead End Rooms")]
+    public GameObject[] treasureRoomPrefabs;
+
+    [Range(0f, 1f)]
+    public float treasureRoomChance = 0.8f;
+
     [Header("Normal Rooms")]
     public GameObject[] roomPrefabs;
 
@@ -41,6 +47,13 @@ public class DungeonGeneratorNew : MonoBehaviour
     {
         GenerateDungeon();
     }
+
+
+    
+    //##########################################################
+    //###############      DUNGEON GENERATION   ################
+    //##########################################################
+ 
 
     void GenerateDungeon()
     {
@@ -89,7 +102,7 @@ public class DungeonGeneratorNew : MonoBehaviour
         for (int i = 1; i < roomCount; i++)
         {
             Queue<SpawnedRoom> roomsToProcess =
-    new Queue<SpawnedRoom>();
+            new Queue<SpawnedRoom>();
 
             roomsToProcess.Enqueue(
                 new SpawnedRoom(startPos, startRoom));
@@ -97,8 +110,17 @@ public class DungeonGeneratorNew : MonoBehaviour
             while (roomsToProcess.Count > 0 &&
                    spawnedRooms.Count < roomCount)
             {
+                SpawnedRoom[] roomArray =
+                 roomsToProcess.ToArray();
+
                 SpawnedRoom currentNode =
-                    roomsToProcess.Dequeue();
+                    roomArray[Random.Range(0, roomArray.Length)];
+
+                roomsToProcess =
+                    new Queue<SpawnedRoom>(
+                        System.Array.FindAll(
+                            roomArray,
+                            r => r != currentNode));
 
                 GameObject currentRoom =
                     currentNode.roomObject;
@@ -115,14 +137,15 @@ public class DungeonGeneratorNew : MonoBehaviour
                 List<DoorDirection> availableDoors =
                     currentDoors.GetAvailableDoors();
 
+                bool spawnedAtLeastOneRoom = false;
+
                 foreach (DoorDirection chosenDoor in availableDoors)
                 {
-                    // Random chance to use this door
-                    if (Random.value > 0.9f)
+                    if (spawnedAtLeastOneRoom &&
+                          Random.value > 0.4f)
+                    {
                         continue;
-
-                    if (spawnedRooms.Count >= roomCount)
-                        break;
+                    }
 
                     Vector2Int direction =
                         DirectionToVector(chosenDoor);
@@ -153,11 +176,17 @@ public class DungeonGeneratorNew : MonoBehaviour
 
                     roomsToProcess.Enqueue(
                         new SpawnedRoom(newPos, nextRoom));
+
+                    spawnedAtLeastOneRoom = true;
+
+                    if (spawnedRooms.Count >= roomCount)
+                        break;
                 }
             }
         }
 
         ReplaceFurthestRoomWithBossRoom();
+        ReplaceDeadEnds();
     }
 
     void SpawnSelectedHero(GameObject startRoom)
@@ -221,6 +250,85 @@ public class DungeonGeneratorNew : MonoBehaviour
         furthestRoom.roomObject = bossRoom;
     }
 
+
+    //##########################################################
+    //##########################################################
+    //###############     DEAD END REPLACEMENT    ##############
+    //##########################################################
+    //##########################################################
+    void ReplaceDeadEnds()
+    {
+        foreach (SpawnedRoom room in spawnedRooms)
+        {
+            // Skip start & boss room
+            if (room.roomObject == null)
+                continue;
+
+            if (room.roomObject.name.Contains(startRoomPrefab.name))
+                continue;
+
+            if (room.roomObject.name.Contains(bossRoomPrefab.name))
+                continue;
+
+            int connections = CountRoomConnections(room.gridPos);
+
+            // Dead end = only 1 connection
+            if (connections == 1)
+            {
+                if (Random.value <= treasureRoomChance)
+                {
+                    ReplaceWithTreasureRoom(room);
+                }
+            }
+        }
+    }
+    
+    //###############    Check for Connections for the Dead End  ##############
+    
+    int CountRoomConnections(Vector2Int pos)
+    {
+        int count = 0;
+
+        Vector2Int[] dirs =
+        {
+        Vector2Int.up,
+        Vector2Int.down,
+        Vector2Int.left,
+        Vector2Int.right
+    };
+
+        foreach (Vector2Int dir in dirs)
+        {
+            if (roomPositions.Contains(pos + dir))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    //###############   Actual Replace last rooms with treasure rooms  ##############
+    void ReplaceWithTreasureRoom(SpawnedRoom room)
+    {
+        if (treasureRoomPrefabs.Length == 0)
+            return;
+
+        Vector3 pos = room.roomObject.transform.position;
+        Quaternion rot = room.roomObject.transform.rotation;
+
+        Destroy(room.roomObject);
+
+        GameObject prefab =
+            treasureRoomPrefabs[
+                Random.Range(0, treasureRoomPrefabs.Length)];
+
+        GameObject newRoom =
+            Instantiate(prefab, pos, rot);
+
+        room.roomObject = newRoom;
+    }
+
     GameObject SpawnSpecificRoom(GameObject prefab, Vector2Int gridPos)
     {
         Vector3 worldPos =
@@ -228,15 +336,6 @@ public class DungeonGeneratorNew : MonoBehaviour
 
         return Instantiate(prefab, worldPos, Quaternion.identity);
     }
-
-    GameObject SpawnRandomRoom(Vector2Int gridPos)
-    {
-        GameObject prefab =
-            roomPrefabs[Random.Range(0, roomPrefabs.Length)];
-
-        return SpawnSpecificRoom(prefab, gridPos);
-    }
-
     GameObject SpawnCompatibleRoom(
         Vector2Int gridPos,
         DoorDirection requiredDoor)
@@ -273,6 +372,9 @@ public class DungeonGeneratorNew : MonoBehaviour
         return SpawnSpecificRoom(selected, gridPos);
     }
 
+    //##########################################################
+    //##################   SPAWN HALLWAYS   ####################
+    //##########################################################
     void SpawnHallway(GameObject roomA, GameObject roomB, Vector2Int direction)
     {
         RoomDoors doorsA = roomA.GetComponent<RoomDoors>();
@@ -313,6 +415,7 @@ public class DungeonGeneratorNew : MonoBehaviour
         Instantiate(hallwayPrefab, midpoint, rotation);
     }
 
+    //##################  HELPER for the DOOR DIRECTION  ####################
     DoorDirection GetDoorDirection(Vector2Int dir)
     {
         if (dir == Vector2Int.up)

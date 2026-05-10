@@ -598,12 +598,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startRoomPrefab: {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
-  bossRoomPrefab: {fileID: 4344407567171454369, guid: 647ffb496de7df145b8c293c52a20c33, type: 3}
+  bossRoomPrefab: {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
+  treasureRoomPrefabs:
+  - {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
+  treasureRoomChance: 1
   roomPrefabs:
   - {fileID: 4344407567171454369, guid: bdb9bb454dca4054491b9a35b88085a1, type: 3}
   hallwayPrefab: {fileID: 6632591138152538228, guid: a730e6bee28975341a115bf5f6687b98, type: 3}
   heroSelection: {fileID: 11400000, guid: b6a544c6bd28fe7489b212941dceddbe, type: 2}
-  roomCount: 30
+  roomCount: 8
   spacing: 40
 --- !u!1 &1719747028
 GameObject:

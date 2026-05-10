@@ -8,11 +8,12 @@ public class EnemyController : MonoBehaviour
     private float lastAttackTime;
     private int currentHealth;
     private CharacterController controller;
-    private DungeonRoom room;
+    private RoomEncounter room;
 
     private void Start()
     {
-        room = GetComponentInParent<DungeonRoom>();
+        room = GetComponentInParent<RoomEncounter>();
+        Debug.Log("Enemy room found: " + room);
         controller = GetComponent<CharacterController>();
         currentHealth = data.maxHealth;
 
@@ -104,7 +105,18 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
-        room?.OnEnemyDied();
+        Debug.Log("DIE FUNCTION CALLED");
+
+        if (room != null)
+        {
+            Debug.Log("Sending death to room");
+            room.OnEnemyDied();
+        }
+        else
+        {
+            Debug.Log("ROOM IS NULL");
+        }
+
         Destroy(gameObject);
     }
 }
