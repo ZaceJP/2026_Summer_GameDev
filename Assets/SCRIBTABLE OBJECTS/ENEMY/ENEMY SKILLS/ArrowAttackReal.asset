@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ArrowAttackReal
   m_EditorClassIdentifier: 
   attackType: 1
-  cooldown: 1
-  meleeRange: 2
+  cooldown: 2
+  attackRange: 8
+  damage: 2
   meleeOffset: 1.2
   slashVFXPrefab: {fileID: 0}
   slashVFXLifetime: 0.3

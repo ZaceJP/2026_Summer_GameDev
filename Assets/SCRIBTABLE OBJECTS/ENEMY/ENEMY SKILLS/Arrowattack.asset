@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832ee8ada23a1fd45add05ed0b6fe977, type: 3}
   m_Name: Arrowattack
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 7
   lifetime: 3
   hitRadius: 0.3
   piercing: 0

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ZombieAttack
   m_EditorClassIdentifier: 
   attackType: 0
-  cooldown: 1
-  meleeRange: 5
+  cooldown: 2
+  attackRange: 4
+  damage: 10
   meleeOffset: 1.2
   slashVFXPrefab: {fileID: 2892878016725166904, guid: e1a327ce695e08c49b9b6e39100c8173, type: 3}
   slashVFXLifetime: 0.3

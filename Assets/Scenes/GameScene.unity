@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 15, z: -10.4}
+  m_LocalPosition: {x: 0, y: 17, z: -10.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -597,126 +597,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f1eecda27c5f349b4eb1a72476de71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startRoomPrefab: {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
+  startRoomPrefab: {fileID: 7426433131194678461, guid: 564ea2c494116f14ab119ca42b747ea9, type: 3}
   bossRoomPrefab: {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
   treasureRoomPrefabs:
-  - {fileID: 1505173598964900215, guid: 2443c163a5f3bcb47abf6ed0e0da96c4, type: 3}
-  treasureRoomChance: 1
+  - {fileID: 2581188267771359443, guid: 59632542db08b26478eb12568e3ec959, type: 3}
+  - {fileID: 2581188267771359443, guid: aac6b2414f7abfb419e25f2b7063fcc2, type: 3}
+  treasureRoomChance: 0.986
   roomPrefabs:
-  - {fileID: 4344407567171454369, guid: bdb9bb454dca4054491b9a35b88085a1, type: 3}
+  - {fileID: 2581188267771359443, guid: 3d1edb15803ac114da0bceb5792f0e4c, type: 3}
+  - {fileID: 2581188267771359443, guid: 061d9838b7805c540bfba3315945615e, type: 3}
+  - {fileID: 2581188267771359443, guid: 404c493742e37a341bf2fcbcdaea10b6, type: 3}
   hallwayPrefab: {fileID: 6632591138152538228, guid: a730e6bee28975341a115bf5f6687b98, type: 3}
   heroSelection: {fileID: 11400000, guid: b6a544c6bd28fe7489b212941dceddbe, type: 2}
-  roomCount: 8
-  spacing: 40
---- !u!1 &1719747028
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1719747032}
-  - component: {fileID: 1719747031}
-  - component: {fileID: 1719747030}
-  - component: {fileID: 1719747029}
-  m_Layer: 0
-  m_Name: BLACKFLOOR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!64 &1719747029
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719747028}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1719747030
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719747028}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: bbe67b5af32c9c848b5ac094fe9010ae, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1719747031
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719747028}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1719747032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719747028}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09083983, y: -1.7, z: 12}
-  m_LocalScale: {x: 7, y: 1, z: 7}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  roomCount: 33
+  spacing: 62
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -726,4 +620,3 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 385160495}
   - {fileID: 766627123}
-  - {fileID: 1719747032}

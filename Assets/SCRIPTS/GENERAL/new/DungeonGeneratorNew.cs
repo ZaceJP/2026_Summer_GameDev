@@ -308,23 +308,68 @@ public class DungeonGeneratorNew : MonoBehaviour
         return count;
     }
 
+    DoorDirection GetConnectionDirection(Vector2Int pos)
+    {
+        if (roomPositions.Contains(pos + Vector2Int.up))
+            return DoorDirection.North;
+
+        if (roomPositions.Contains(pos + Vector2Int.down))
+            return DoorDirection.South;
+
+        if (roomPositions.Contains(pos + Vector2Int.right))
+            return DoorDirection.East;
+
+        if (roomPositions.Contains(pos + Vector2Int.left))
+            return DoorDirection.West;
+
+        return DoorDirection.North;
+    }
+
     //###############   Actual Replace last rooms with treasure rooms  ##############
     void ReplaceWithTreasureRoom(SpawnedRoom room)
     {
         if (treasureRoomPrefabs.Length == 0)
             return;
 
+        // Which side connects to another room?
+        DoorDirection requiredDoor =
+            GetConnectionDirection(room.gridPos);
+
+        // Find treasure rooms with matching door
+        List<GameObject> validRooms =
+            new List<GameObject>();
+
+        foreach (GameObject prefab in treasureRoomPrefabs)
+        {
+            RoomDoors doors =
+                prefab.GetComponent<RoomDoors>();
+
+            if (doors != null &&
+                doors.HasDoor(requiredDoor))
+            {
+                validRooms.Add(prefab);
+            }
+        }
+
+        if (validRooms.Count == 0)
+        {
+            Debug.LogWarning(
+                $"No treasure room found with {requiredDoor} door.");
+
+            return;
+        }
+
         Vector3 pos = room.roomObject.transform.position;
         Quaternion rot = room.roomObject.transform.rotation;
 
         Destroy(room.roomObject);
 
-        GameObject prefab =
-            treasureRoomPrefabs[
-                Random.Range(0, treasureRoomPrefabs.Length)];
+        GameObject selectedPrefab =
+            validRooms[
+                Random.Range(0, validRooms.Count)];
 
         GameObject newRoom =
-            Instantiate(prefab, pos, rot);
+            Instantiate(selectedPrefab, pos, rot);
 
         room.roomObject = newRoom;
     }
