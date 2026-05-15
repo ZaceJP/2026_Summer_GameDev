@@ -3,13 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    // Drag the correct AttackData SO here per character class
-    public AttackData attackData;
+    [Header("References")]
+    [HideInInspector] public HeroDefinition heroDef; // Set by PlayerInitializer
 
     private Vector2 moveInput;
     private Vector3 aimDirection;
-
     private float lastAttackTime;
+
     private PlayerStats stats;
 
     private void Start()
@@ -22,6 +22,100 @@ public class PlayerAttack : MonoBehaviour
     {
         HandleAiming();
     }
+
+    // ########## INPUT HANDLING ##########
+
+    public void OnMove(InputValue value) => moveInput = value.Get<Vector2>();
+
+    // Called by Left Click
+    public void OnAttack()
+    {
+        if (heroDef == null || heroDef.primaryAttack == null) return;
+        PerformAttack(heroDef.primaryAttack);
+    }
+
+    // Called by Right Click (Make sure this action exists in your Input Actions asset)
+    public void OnSecondaryAttack()
+    {
+        if (heroDef == null || heroDef.secondaryAttack == null) return;
+        PerformAttack(heroDef.secondaryAttack);
+    }
+
+    // ########## COMBAT LOGIC ##########
+
+    private void PerformAttack(AttackData data)
+    {
+        // Use PlayerStats attack speed if available, otherwise use default SO cooldown
+        float cooldown = stats != null ? 1f / stats.GetAttackSpeed() : data.cooldown;
+
+        if (Time.time < lastAttackTime + cooldown) return;
+        lastAttackTime = Time.time;
+
+        if (data.attackType == AttackType.Melee)
+            AttackMelee(data);
+        else
+            AttackProjectile(data);
+    }
+
+    void AttackMelee(AttackData data)
+    {
+        Vector3 origin = transform.position + aimDirection * data.meleeOffset;
+
+        if (data.slashVFXPrefab != null)
+        {
+            GameObject slash = Instantiate(data.slashVFXPrefab, origin, Quaternion.LookRotation(aimDirection));
+            slash.transform.localScale = Vector3.one * 1.5f;
+            Destroy(slash, data.slashVFXLifetime);
+        }
+
+        // Use PlayerStats range if available, otherwise use default SO range
+        float range = stats != null ? stats.GetAttackRange() : data.attackRange;
+
+        Collider[] hits = Physics.OverlapSphere(origin, range);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                EnemyController enemy = hit.GetComponent<EnemyController>();
+                if (enemy != null)
+                {
+                    int damage = stats != null ? (int)stats.GetDamage() : data.damage;
+                    enemy.TakeDamage(damage);
+                }
+            }
+        }
+    }
+
+    void AttackProjectile(AttackData data)
+    {
+        if (data.projectileData?.projectilePrefab == null) return;
+
+        int count = data.projectileCount;
+        int damage = stats != null ? (int)stats.GetDamage() : data.damage;
+
+        float totalSpread = data.spreadAngle * (count - 1);
+        float startAngle = -totalSpread / 2f;
+
+        for (int i = 0; i < count; i++)
+        {
+            float angle = startAngle + data.spreadAngle * i;
+            Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * aimDirection;
+            SpawnProjectile(data, dir, "Enemy", damage);
+        }
+    }
+
+    void SpawnProjectile(AttackData data, Vector3 dir, string targetTag, int damage)
+    {
+        Vector3 spawnPos = transform.position + dir * 0.6f + Vector3.up * 0.5f;
+        GameObject obj = Instantiate(data.projectileData.projectilePrefab, spawnPos, Quaternion.LookRotation(dir));
+
+        Projectile p = obj.GetComponent<Projectile>();
+        if (p == null) p = obj.AddComponent<Projectile>();
+
+        p.Init(data.projectileData, dir, targetTag, damage);
+    }
+
+    // ########## UTILS ##########
 
     void HandleAiming()
     {
@@ -42,80 +136,6 @@ public class PlayerAttack : MonoBehaviour
             transform.forward = aimDirection;
     }
 
-    public void OnMove(InputValue value) => moveInput = value.Get<Vector2>();
-
-    public void OnAttack()
-    {
-        if (attackData == null) return;
-
-        // Before: 1f / stats.attackSpeed
-        float cooldown = stats != null ? 1f / stats.GetAttackSpeed() : attackData.cooldown;
-
-        if (Time.time < lastAttackTime + cooldown) return;
-        lastAttackTime = Time.time;
-
-        if (attackData.attackType == AttackType.Melee)
-            AttackMelee();
-        else
-            AttackProjectile();
-    }
-
-    void AttackMelee()
-    {
-        Vector3 origin = transform.position + aimDirection * attackData.meleeOffset;
-
-        if (attackData.slashVFXPrefab != null)
-        {
-            GameObject slash = Instantiate(attackData.slashVFXPrefab, origin,
-                                           Quaternion.LookRotation(aimDirection));
-            slash.transform.localScale = Vector3.one * 1.5f;
-            Destroy(slash, attackData.slashVFXLifetime);
-        }
-
-        // Before: stats.attackRange
-        float range = stats != null ? stats.GetAttackRange() : attackData.attackRange;
-        Collider[] hits = Physics.OverlapSphere(origin, range);
-        foreach (var hit in hits)
-        {
-            if (hit.CompareTag("Enemy"))
-            {
-                EnemyController enemy = hit.GetComponent<EnemyController>();
-                if (enemy != null)
-                    enemy.TakeDamage(stats != null ? (int)stats.GetDamage() : 10);
-            }
-        }
-    }
-
-    void AttackProjectile()
-    {
-        if (attackData.projectileData?.projectilePrefab == null) return;
-
-        int count = attackData.projectileCount;
-        int damage = stats != null ? (int)stats.GetDamage() : 10;
-
-        // Calculate spread directions
-        float totalSpread = attackData.spreadAngle * (count - 1);
-        float startAngle = -totalSpread / 2f;
-
-        for (int i = 0; i < count; i++)
-        {
-            float angle = startAngle + attackData.spreadAngle * i;
-            Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * aimDirection;
-
-            SpawnProjectile(dir, "Enemy", damage);
-        }
-    }
-
-    void SpawnProjectile(Vector3 dir, string targetTag, int damage)
-    {
-        Vector3 spawnPos = transform.position + dir * 0.6f + Vector3.up * 0.5f;
-        GameObject obj = Instantiate(attackData.projectileData.projectilePrefab,
-                                     spawnPos, Quaternion.LookRotation(dir));
-
-        Projectile p = obj.AddComponent<Projectile>();
-        p.Init(attackData.projectileData, dir, targetTag, damage);
-    }
-
     Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -126,10 +146,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (attackData == null) return;
+        // Preview the primary attack range in the editor
+        if (heroDef == null || heroDef.primaryAttack == null) return;
         Gizmos.color = Color.blue;
-        // Before: stats.attackRange
-        float range = stats != null ? stats.GetAttackRange() : attackData.attackRange;
-        Gizmos.DrawWireSphere(transform.position + aimDirection * attackData.meleeOffset, range);
+        float range = stats != null ? stats.GetAttackRange() : heroDef.primaryAttack.attackRange;
+        Gizmos.DrawWireSphere(transform.position + aimDirection * heroDef.primaryAttack.meleeOffset, range);
     }
 }

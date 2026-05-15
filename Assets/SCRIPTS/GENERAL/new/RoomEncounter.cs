@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomEncounter : MonoBehaviour
@@ -83,6 +84,11 @@ public class RoomEncounter : MonoBehaviour
         Debug.Log("ROOM CLEARED: " + gameObject.name);
 
         UnlockAllDoors();
+
+        List<UpgradeData> rewards =
+        RewardManager.Instance.GenerateRewards();
+
+        RewardUI.Instance.ShowRewards(rewards);
     }
 
     private void LockAllDoors()

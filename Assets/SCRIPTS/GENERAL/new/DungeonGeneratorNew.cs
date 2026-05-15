@@ -212,10 +212,24 @@ public class DungeonGeneratorNew : MonoBehaviour
             return;
         }
 
-        Instantiate(
-            heroSelection.selectedHero.prefab,
-            spawnPoint.position,
-            spawnPoint.rotation);
+        GameObject player = Instantiate(
+    heroSelection.selectedHero.prefab,
+    spawnPoint.position,
+    spawnPoint.rotation);
+
+        PlayerInitializer initializer =
+            player.GetComponent<PlayerInitializer>();
+
+        if (initializer != null)
+        {
+            initializer.heroDefinition = heroSelection.selectedHero;
+            initializer.Initialize();
+            Debug.Log("User selected hero spawned and initialized.");
+        }
+        else
+        {
+            Debug.LogError("Player prefab missing PlayerInitializer!");
+        }
     }
 
     void ReplaceFurthestRoomWithBossRoom()

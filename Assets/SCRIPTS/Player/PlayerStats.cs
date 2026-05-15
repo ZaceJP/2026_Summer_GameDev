@@ -16,12 +16,19 @@ public class PlayerStats : MonoBehaviour
     public float attackSpeedMultiplier = 1f;
     public float rangeMultiplier = 1f;
 
+    public PlayerModifiers modifiers;
+
     // ── Computed getters ──────────────────────────────────────────
     public float GetDamage() => baseDamage * damageMultiplier;
     public float GetMoveSpeed() => moveSpeed * speedMultiplier;
     public float GetAttackSpeed() => attackSpeed * attackSpeedMultiplier;
     public float GetAttackRange() => attackRange * rangeMultiplier;
 
+
+    private void Awake()
+    {
+        modifiers = GetComponent<PlayerModifiers>();
+    }
     // ── Health API ────────────────────────────────────────────────
     public void Init(int startingHealth)
     {

@@ -4,15 +4,17 @@ public class PlayerInitializer : MonoBehaviour
 {
     [HideInInspector] public HeroDefinition heroDefinition;
 
-    private void Start()
+    public void Initialize()
     {
         if (heroDefinition == null)
         {
-            Debug.LogError("PlayerInitializer: No HeroDefinition assigned!");
+            Debug.LogError($"[PlayerInitializer] No HeroDefinition assigned to {gameObject.name}!");
             return;
         }
 
-        PlayerStats stats = GetComponent<PlayerStats>();
+        // 1. Initialize Stats
+        // We use GetComponentInChildren in case the scripts are on a child "Logic" object
+        PlayerStats stats = GetComponentInChildren<PlayerStats>();
         if (stats != null)
         {
             stats.maxHealth = heroDefinition.maxHealth;
@@ -20,11 +22,20 @@ public class PlayerInitializer : MonoBehaviour
             stats.baseDamage = heroDefinition.baseDamage;
             stats.attackSpeed = heroDefinition.attackSpeed;
             stats.attackRange = heroDefinition.attackRange;
-            stats.Init(heroDefinition.maxHealth);  // sets currentHealth
+
+            // This sets currentHealth to maxHealth
+            stats.Init(heroDefinition.maxHealth);
+
+            Debug.Log($"[Initializer] {heroDefinition.heroName} stats initialized. HP: {stats.maxHealth}, Speed: {stats.moveSpeed}");
         }
 
-        PlayerAttack attack = GetComponent<PlayerAttack>();
+        // 2. Initialize Combat
+        PlayerAttack attack = GetComponentInChildren<PlayerAttack>();
         if (attack != null)
-            attack.attackData = heroDefinition.primaryAttack;
+        {
+            // Hand over the whole SO so the attack script can access primary/secondary attacks
+            attack.heroDef = heroDefinition;
+            Debug.Log($"[Initializer] {heroDefinition.heroName} combat skills linked.");
+        }
     }
 }

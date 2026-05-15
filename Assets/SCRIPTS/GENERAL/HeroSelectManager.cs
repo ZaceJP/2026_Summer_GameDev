@@ -6,6 +6,7 @@ public class HeroSelectManager : MonoBehaviour
     public HeroSelection heroSelection;     // drag the HeroSelection SO here
     public HeroDefinition warriorDefinition;
     public HeroDefinition mageDefinition;
+    public HeroDefinition rikutoDefinition;
     // add more heroes here as you expand
 
     public void SelectWarrior()
@@ -13,6 +14,10 @@ public class HeroSelectManager : MonoBehaviour
         heroSelection.selectedHero = warriorDefinition;
     }
 
+    public void SelectRikuto()
+    {
+        heroSelection.selectedHero = rikutoDefinition;
+    }
     public void SelectMage()
     {
         heroSelection.selectedHero = mageDefinition;
