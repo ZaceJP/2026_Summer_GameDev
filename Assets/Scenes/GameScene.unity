@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -722,7 +722,8 @@ MonoBehaviour:
   allUpgrades:
   - {fileID: 11400000, guid: 473bf86e17c83d04cbe3e5dab1bf668c, type: 2}
   - {fileID: 11400000, guid: 6519a689c5228354880c1fdb4281d971, type: 2}
-  - {fileID: 11400000, guid: 48c9b0ee39914234183121919e23f6a4, type: 2}
+  - {fileID: 11400000, guid: f058bdac91b272f4bbe0f179d67f1cd0, type: 2}
+  - {fileID: 11400000, guid: 92eb82ee8f93ed74aa1d04dc87921621, type: 2}
 --- !u!1 &813462548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1247,10 @@ PrefabInstance:
     - target: {fileID: 655283867979488062, guid: 5e218e02d2740db479e14ea47efe2954, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379279531632680984, guid: 5e218e02d2740db479e14ea47efe2954, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6214280084410209600, guid: 5e218e02d2740db479e14ea47efe2954, type: 3}
       propertyPath: m_Name

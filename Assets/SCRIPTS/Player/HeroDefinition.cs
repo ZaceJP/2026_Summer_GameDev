@@ -5,6 +5,7 @@ public class HeroDefinition : ScriptableObject
 {
     [Header("Identity")]
     public string heroName;
+    public HeroClass heroClass = HeroClass.Universal;
     public Sprite portrait;
     public GameObject prefab;
 

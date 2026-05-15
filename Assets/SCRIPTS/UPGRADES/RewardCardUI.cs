@@ -15,6 +15,8 @@ public class RewardCardUI : MonoBehaviour
 
     public void Setup(UpgradeData upgrade, RewardUI ui)
     {
+        Debug.Log("SETUP CARD: " + upgrade.upgradeName);
+
         currentUpgrade = upgrade;
         rewardUI = ui;
 
@@ -24,10 +26,13 @@ public class RewardCardUI : MonoBehaviour
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(OnSelected);
+
+        Debug.Log("BUTTON CONNECTED");
     }
 
     void OnSelected()
     {
+        Debug.Log("CARD CLICKED");
         rewardUI.SelectReward(currentUpgrade);
     }
 }

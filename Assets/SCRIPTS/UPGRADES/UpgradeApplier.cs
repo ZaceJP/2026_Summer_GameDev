@@ -13,6 +13,12 @@ public class UpgradeApplier : MonoBehaviour
 
     public void ApplyUpgrade(UpgradeData upgrade)
     {
+        float finalValue = upgrade.value;
+
+        // Convert percentages automatically
+        if (upgrade.isPercentage)
+            finalValue *= 0.01f;
+
         switch (upgrade.upgradeType)
         {
             // ─────────────────────────────
@@ -20,19 +26,19 @@ public class UpgradeApplier : MonoBehaviour
             // ─────────────────────────────
 
             case UpgradeType.Damage:
-                stats.ApplyDamageBonus(upgrade.value);
+                stats.ApplyDamageBonus(finalValue);
                 break;
 
             case UpgradeType.AttackSpeed:
-                stats.ApplyAttackSpeedBonus(upgrade.value);
+                stats.ApplyAttackSpeedBonus(finalValue);
                 break;
 
             case UpgradeType.MoveSpeed:
-                stats.ApplySpeedBonus(upgrade.value);
+                stats.ApplySpeedBonus(finalValue);
                 break;
 
             case UpgradeType.AttackRange:
-                stats.ApplyRangeBonus(upgrade.value);
+                stats.ApplyRangeBonus(finalValue);
                 break;
 
             case UpgradeType.MaxHealth:
@@ -40,12 +46,29 @@ public class UpgradeApplier : MonoBehaviour
                 stats.currentHealth += Mathf.RoundToInt(upgrade.value);
                 break;
 
+            case UpgradeType.Gold:
+                stats.gold += Mathf.RoundToInt(upgrade.value);
+                break;
+
             // ─────────────────────────────
             // UTILITY
             // ─────────────────────────────
 
             case UpgradeType.Heal:
-                stats.Heal(Mathf.RoundToInt(stats.maxHealth * upgrade.value));
+
+                // percentage heal
+                if (upgrade.isPercentage)
+                {
+                    int healAmount =
+                        Mathf.RoundToInt(stats.maxHealth * finalValue);
+
+                    stats.Heal(healAmount);
+                }
+                else
+                {
+                    stats.Heal(Mathf.RoundToInt(upgrade.value));
+                }
+
                 break;
 
             // ─────────────────────────────
@@ -57,20 +80,20 @@ public class UpgradeApplier : MonoBehaviour
                 break;
 
             case UpgradeType.CritChance:
-                modifiers.critChanceBonus += upgrade.value;
+                modifiers.critChanceBonus += finalValue;
                 break;
 
             case UpgradeType.CritDamage:
-                modifiers.critDamageBonus += upgrade.value;
+                modifiers.critDamageBonus += finalValue;
                 break;
 
             case UpgradeType.Lifesteal:
-                modifiers.lifestealPercent += upgrade.value;
+                modifiers.lifestealPercent += finalValue;
                 break;
 
             case UpgradeType.BurnOnHit:
                 modifiers.burnOnHit = true;
-                modifiers.burnChance += upgrade.value;
+                modifiers.burnChance += finalValue;
                 break;
 
             case UpgradeType.ExplosionOnKill:
@@ -82,7 +105,7 @@ public class UpgradeApplier : MonoBehaviour
                 break;
 
             case UpgradeType.AreaSize:
-                modifiers.areaSizeMultiplier += upgrade.value;
+                modifiers.areaSizeMultiplier += finalValue;
                 break;
         }
 

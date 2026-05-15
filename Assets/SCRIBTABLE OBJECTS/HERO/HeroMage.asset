@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: HeroMage
   m_EditorClassIdentifier: 
   heroName: Mage
+  heroClass: 2
   portrait: {fileID: 21300000, guid: 43bf82c5057728f49af90cd1133735b9, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 09d52760eb7236c42953ae1af0c44d7a, type: 3}
   maxHealth: 100
-  moveSpeed: 100
+  moveSpeed: 15
   attackSpeed: 1
   baseDamage: 10
   attackRange: 2

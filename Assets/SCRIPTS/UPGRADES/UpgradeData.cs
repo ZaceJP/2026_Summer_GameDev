@@ -13,6 +13,9 @@ public class UpgradeData : ScriptableObject
     public UpgradeType upgradeType;
     public UpgradeRarity rarity;
 
+    [Header("Class Restriction")]
+    public HeroClass allowedClass = HeroClass.Universal;
+
     [Header("Values")]
     public float value;
     public bool isPercentage = false;

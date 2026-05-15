@@ -44,7 +44,7 @@ public class RewardUI : MonoBehaviour
     public void SelectReward(UpgradeData reward)
     {
         UpgradeApplier applier =
-            playerStats.GetComponent<UpgradeApplier>();
+         FindFirstObjectByType<UpgradeApplier>();
 
         applier.ApplyUpgrade(reward);
 

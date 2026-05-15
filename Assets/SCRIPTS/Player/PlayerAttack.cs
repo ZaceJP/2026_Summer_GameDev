@@ -59,27 +59,80 @@ public class PlayerAttack : MonoBehaviour
 
     void AttackMelee(AttackData data)
     {
-        Vector3 origin = transform.position + aimDirection * data.meleeOffset;
+        Vector3 origin =
+            transform.position + aimDirection * data.meleeOffset;
 
+        // RANGE = how far attack reaches
+        float range =
+            stats != null
+            ? stats.GetAttackRange()
+            : data.attackRange;
+
+        // AREA SIZE = how wide/thick the slash becomes
+        float areaSize =
+            stats != null
+            ? stats.modifiers.areaSizeMultiplier
+            : 1f;
+
+        // VISUAL SLASH
         if (data.slashVFXPrefab != null)
         {
-            GameObject slash = Instantiate(data.slashVFXPrefab, origin, Quaternion.LookRotation(aimDirection));
-            slash.transform.localScale = Vector3.one * 1.5f;
+            GameObject slash =
+                Instantiate(
+                    data.slashVFXPrefab,
+                    origin,
+                    Quaternion.LookRotation(aimDirection)
+                );
+
+            // Forward length
+            float visualLength = range * 1.5f;
+
+            // Width / thickness
+            float visualWidth = 1.5f * areaSize;
+
+            slash.transform.localScale =
+                new Vector3(
+                    visualWidth,
+                    1f,
+                    visualLength
+                );
+
             Destroy(slash, data.slashVFXLifetime);
         }
 
-        // Use PlayerStats range if available, otherwise use default SO range
-        float range = stats != null ? stats.GetAttackRange() : data.attackRange;
+        // Hit detection
+        Vector3 boxHalfExtents =
+     new Vector3(
+         areaSize * 0.75f,
+         1f,
+         range * 0.5f
+     );
 
-        Collider[] hits = Physics.OverlapSphere(origin, range);
+        Vector3 boxCenter =
+            transform.position +
+            aimDirection * (range * 0.5f);
+
+        Collider[] hits =
+            Physics.OverlapBox(
+                boxCenter,
+                boxHalfExtents,
+                Quaternion.LookRotation(aimDirection)
+            );
+
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Enemy"))
             {
-                EnemyController enemy = hit.GetComponent<EnemyController>();
+                EnemyController enemy =
+                    hit.GetComponent<EnemyController>();
+
                 if (enemy != null)
                 {
-                    int damage = stats != null ? (int)stats.GetDamage() : data.damage;
+                    int damage =
+                        stats != null
+                        ? (int)stats.GetDamage()
+                        : data.damage;
+
                     enemy.TakeDamage(damage);
                 }
             }
@@ -90,7 +143,15 @@ public class PlayerAttack : MonoBehaviour
     {
         if (data.projectileData?.projectilePrefab == null) return;
 
-        int count = data.projectileCount;
+         int bonus =
+             stats.modifiers != null
+             ? stats.modifiers.bonusProjectiles
+                 : 0;
+
+        int count = data.projectileCount + bonus;
+
+        Debug.Log("Projectile Count: " + count);
+
         int damage = stats != null ? (int)stats.GetDamage() : data.damage;
 
         float totalSpread = data.spreadAngle * (count - 1);
@@ -146,10 +207,58 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Preview the primary attack range in the editor
-        if (heroDef == null || heroDef.primaryAttack == null) return;
-        Gizmos.color = Color.blue;
-        float range = stats != null ? stats.GetAttackRange() : heroDef.primaryAttack.attackRange;
-        Gizmos.DrawWireSphere(transform.position + aimDirection * heroDef.primaryAttack.meleeOffset, range);
+        if (heroDef == null || heroDef.primaryAttack == null)
+            return;
+
+        AttackData data = heroDef.primaryAttack;
+
+        // Only show melee gizmo
+        if (data.attackType != AttackType.Melee)
+            return;
+
+        // Fallback values when not in play mode
+        float range = data.attackRange;
+        float width = 1f;
+
+        if (stats != null && stats.modifiers != null)
+        {
+            range = stats.GetAttackRange();
+
+            width =
+                stats.modifiers.areaSizeMultiplier;
+        }
+
+        Vector3 origin =
+            transform.position +
+            aimDirection * data.meleeOffset;
+
+        Vector3 halfExtents =
+    new Vector3(
+        width * 0.75f,
+        1f,
+        range * 0.5f
+    );
+
+        Vector3 center =
+            transform.position +
+            aimDirection * (range * 0.5f);
+
+        Gizmos.color = Color.red;
+
+        Matrix4x4 oldMatrix = Gizmos.matrix;
+
+        Gizmos.matrix =
+            Matrix4x4.TRS(
+                center,
+                Quaternion.LookRotation(aimDirection),
+                Vector3.one
+            );
+
+        Gizmos.DrawWireCube(
+            Vector3.zero,
+            halfExtents * 2f
+        );
+
+        Gizmos.matrix = oldMatrix;
     }
 }

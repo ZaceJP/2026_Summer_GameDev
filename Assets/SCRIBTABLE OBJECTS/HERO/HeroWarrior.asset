@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HeroWarrior
   m_EditorClassIdentifier: 
   heroName: Warrior
+  heroClass: 1
   portrait: {fileID: 21300000, guid: e02d90fd57af3f749971fe837f7e7a19, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 58a8ca86296b455409bfd5f704b592b6, type: 3}
   maxHealth: 100

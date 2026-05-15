@@ -16,6 +16,9 @@ public class PlayerStats : MonoBehaviour
     public float attackSpeedMultiplier = 1f;
     public float rangeMultiplier = 1f;
 
+    [Header("Income")]
+    public int gold;
+
     public PlayerModifiers modifiers;
 
     // ── Computed getters ──────────────────────────────────────────
@@ -27,7 +30,8 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
-        modifiers = GetComponent<PlayerModifiers>();
+        modifiers = GetComponentInChildren<PlayerModifiers>();
+        Debug.Log("Modifiers found: " + modifiers);
     }
     // ── Health API ────────────────────────────────────────────────
     public void Init(int startingHealth)
@@ -56,8 +60,23 @@ public class PlayerStats : MonoBehaviour
     }
 
     // ── Upgrade API ───────────────────────────────────────────────
-    public void ApplyDamageBonus(float multiplier) => damageMultiplier += multiplier;
-    public void ApplySpeedBonus(float multiplier) => speedMultiplier += multiplier;
-    public void ApplyAttackSpeedBonus(float multiplier) => attackSpeedMultiplier += multiplier;
-    public void ApplyRangeBonus(float multiplier) => rangeMultiplier += multiplier;
+    public void ApplyDamageBonus(float percent)
+    {
+        damageMultiplier += percent;
+    }
+
+    public void ApplySpeedBonus(float percent)
+    {
+        speedMultiplier += percent;
+    }
+
+    public void ApplyAttackSpeedBonus(float percent)
+    {
+        attackSpeedMultiplier += percent;
+    }
+
+    public void ApplyRangeBonus(float percent)
+    {
+        rangeMultiplier += percent;
+    }
 }

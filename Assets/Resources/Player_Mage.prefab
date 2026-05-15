@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 8557200277536286687}
   - component: {fileID: 5982202555859472674}
   - component: {fileID: 2431656453378503040}
+  - component: {fileID: 2933943398901978907}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -265,6 +266,7 @@ MonoBehaviour:
   speedMultiplier: 1
   attackSpeedMultiplier: 1
   rangeMultiplier: 1
+  gold: 0
   modifiers: {fileID: 0}
 --- !u!114 &2431656453378503040
 MonoBehaviour:
@@ -278,3 +280,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66fc6b0cd207bf5478a99da7fa1e3202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2933943398901978907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551427650568944653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803fbec89927fd3469f5c59257567a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusProjectiles: 0
+  projectileSpreadBonus: 0
+  projectileSpeedMultiplier: 1
+  bonusPierce: 0
+  critChanceBonus: 0
+  critDamageBonus: 0.5
+  burnOnHit: 0
+  burnChance: 0
+  burnDuration: 0
+  burnDamagePerTick: 0
+  slowOnHit: 0
+  slowAmount: 0
+  slowDuration: 0
+  explosiveKills: 0
+  explosionRadius: 0
+  explosionDamage: 0
+  lifestealPercent: 0
+  leaveTrailEffect: 0
+  gainBonusWhileStandingStill: 0
+  areaSizeMultiplier: 1
