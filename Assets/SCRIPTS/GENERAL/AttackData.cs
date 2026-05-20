@@ -13,7 +13,7 @@ public class AttackData : ScriptableObject
     public int damage = 10;    // base damage — player overrides with PlayerStats
 
     [Header("Melee Only")]
-    public float meleeOffset = 1.2f;
+    public float meleeOffset = 0.2f;
     public GameObject slashVFXPrefab;
     public float slashVFXLifetime = 0.3f;
 

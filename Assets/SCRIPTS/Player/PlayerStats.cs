@@ -42,6 +42,16 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (DamageNumberManager.Instance != null)
+        {
+            DamageNumberManager.Instance.ShowDamage(
+            amount,
+            transform.position + Vector3.up * 2f,
+            false,
+            true
+               );
+        }
+
         currentHealth -= amount;
         Debug.Log($"Player HP: {currentHealth} / {maxHealth}");
         if (currentHealth <= 0)

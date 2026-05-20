@@ -77,18 +77,21 @@ public class PlayerAttack : MonoBehaviour
         // VISUAL SLASH
         if (data.slashVFXPrefab != null)
         {
+            // Position visual exactly where hitbox is
+            Vector3 visualCenter =
+                transform.position +
+                aimDirection * data.meleeOffset;
+
             GameObject slash =
                 Instantiate(
                     data.slashVFXPrefab,
-                    origin,
+                    visualCenter,
                     Quaternion.LookRotation(aimDirection)
                 );
 
-            // Forward length
-            float visualLength = range * 1.5f;
-
-            // Width / thickness
-            float visualWidth = 1.5f * areaSize;
+            // Match actual hitbox size
+            float visualLength = range;
+            float visualWidth = areaSize * 1.5f;
 
             slash.transform.localScale =
                 new Vector3(
@@ -110,7 +113,7 @@ public class PlayerAttack : MonoBehaviour
 
         Vector3 boxCenter =
             transform.position +
-            aimDirection * (range * 0.5f);
+            aimDirection * (range);
 
         Collider[] hits =
             Physics.OverlapBox(
@@ -134,6 +137,11 @@ public class PlayerAttack : MonoBehaviour
                         : data.damage;
 
                     enemy.TakeDamage(damage);
+
+                    Vector3 knockDir =
+                     (enemy.transform.position - transform.position).normalized;
+
+                    enemy.ApplyKnockback(knockDir, 6f);
                 }
             }
         }

@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+    [Header("Hit Reaction")]
+    public float knockbackForce = 6f;
+    public float knockbackDuration = 0.12f;
+
+    private Vector3 knockbackVelocity;
+    private float knockbackTimer;
+
     public EnemyData data;
     public Transform player;
 
@@ -31,6 +39,13 @@ public class EnemyController : MonoBehaviour
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
             else return;
+        }
+
+        if (knockbackTimer > 0f)
+        {
+            transform.position += knockbackVelocity * Time.deltaTime;
+            knockbackTimer -= Time.deltaTime;
+            return;
         }
 
         float distance = Vector3.Distance(transform.position, player.position);
@@ -97,10 +112,21 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        DamageNumberManager.Instance.ShowDamage(
+          amount,
+          transform.position + Vector3.up * 2f
+        );
+
         currentHealth -= amount;
         Debug.Log($"Enemy HP: {currentHealth} / {data.maxHealth}");
         if (currentHealth <= 0)
             Die();
+    }
+
+    public void ApplyKnockback(Vector3 direction, float force)
+    {
+        knockbackVelocity = direction.normalized * force;
+        knockbackTimer = knockbackDuration;
     }
 
     void Die()
