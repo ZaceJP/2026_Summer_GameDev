@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b036ebab1fbdfb4ab88a4e49ae8ba17, type: 3}
-  m_Name: Warrior
+  m_Name: MagePrimary
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 1
   cooldown: 0.5
-  meleeRange: 2
+  attackRange: 5
+  damage: 10
   meleeOffset: 1.2
-  slashVFXPrefab: {fileID: 2892878016725166904, guid: e1a327ce695e08c49b9b6e39100c8173, type: 3}
+  slashVFXPrefab: {fileID: 0}
   slashVFXLifetime: 0.3
-  projectileData: {fileID: 0}
+  projectileData: {fileID: 11400000, guid: a4396394fbf519443b009aeb19a50851, type: 2}
   projectileCount: 1
   spreadAngle: 15

@@ -14,4 +14,8 @@ public class EnemyData : ScriptableObject
     [Header("References")]
     public GameObject modelPrefab;
     public RuntimeAnimatorController animator;
+
+    [Header("Audio SFX")]
+    public AudioClip getHitSFX;
+    public AudioClip dieSFX;
 }

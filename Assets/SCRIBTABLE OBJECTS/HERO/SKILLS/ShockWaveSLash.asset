@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832ee8ada23a1fd45add05ed0b6fe977, type: 3}
+  m_Name: ShockWaveSLash
+  m_EditorClassIdentifier: 
+  speed: 20
+  lifetime: 1
+  hitRadius: 1.5
+  piercing: 0
+  projectilePrefab: {fileID: 798164934013986568, guid: b4585d9bc61e2c947807b7f13db7f9a7, type: 3}
+  impactVFXPrefab: {fileID: 380034906304533835, guid: 24abd7904054e4d47af1b1a7e974fd0f, type: 3}
+  impactVFXLifetime: 0.5

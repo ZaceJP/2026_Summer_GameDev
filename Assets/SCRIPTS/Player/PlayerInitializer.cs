@@ -17,6 +17,8 @@ public class PlayerInitializer : MonoBehaviour
         PlayerStats stats = GetComponentInChildren<PlayerStats>();
         if (stats != null)
         {
+            stats.heroDef = heroDefinition;
+
             stats.maxHealth = heroDefinition.maxHealth;
             stats.moveSpeed = heroDefinition.moveSpeed;
             stats.baseDamage = heroDefinition.baseDamage;

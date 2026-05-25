@@ -15,7 +15,9 @@ public class AttackData : ScriptableObject
     [Header("Melee Only")]
     public float meleeOffset = 0.2f;
     public GameObject slashVFXPrefab;
+    public Vector2 slashVisualScale = Vector2.one;
     public float slashVFXLifetime = 0.3f;
+
 
     [Header("Projectile Only")]
     public ProjectileData projectileData;

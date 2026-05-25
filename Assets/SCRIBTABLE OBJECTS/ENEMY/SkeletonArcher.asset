@@ -18,3 +18,5 @@ MonoBehaviour:
   attackData: {fileID: 11400000, guid: b8cf932a96a34de4f912d03a1843a03c, type: 2}
   modelPrefab: {fileID: 8503890071833200495, guid: 5732e5809068e8b41be568b6f090b4eb, type: 3}
   animator: {fileID: 0}
+  getHitSFX: {fileID: 8300000, guid: 65fe5fe59714ac047b330aeff6ee5eee, type: 3}
+  dieSFX: {fileID: 8300000, guid: 1345ca95580652e4eb7e8de54588ce7b, type: 3}

@@ -18,12 +18,18 @@ public class EnemyController : MonoBehaviour
     private CharacterController controller;
     private RoomEncounter room;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
         room = GetComponentInParent<RoomEncounter>();
         Debug.Log("Enemy room found: " + room);
         controller = GetComponent<CharacterController>();
         currentHealth = data.maxHealth;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
         if (player == null)
         {
@@ -119,6 +125,13 @@ public class EnemyController : MonoBehaviour
 
         currentHealth -= amount;
         Debug.Log($"Enemy HP: {currentHealth} / {data.maxHealth}");
+
+        // Play enemy hurt audio
+        if (currentHealth > 0 && data != null && data.getHitSFX != null)
+        {
+            audioSource.PlayOneShot(data.getHitSFX);
+        }
+
         if (currentHealth <= 0)
             Die();
     }
@@ -132,6 +145,13 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         Debug.Log("DIE FUNCTION CALLED");
+
+        // Instantiates a temporary dummy object that plays the audio, then automatically destroys itself.
+        // This ensures the death sound doesn't get clipped when the enemy GameObject is destroyed.
+        if (data != null && data.dieSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(data.dieSFX, transform.position);
+        }
 
         if (room != null)
         {

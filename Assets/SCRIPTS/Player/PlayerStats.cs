@@ -2,6 +2,10 @@
 
 public class PlayerStats : MonoBehaviour
 {
+    [Header("References")]
+    [HideInInspector] public HeroDefinition heroDef;
+
+
     [Header("Base Stats — set at runtime from HeroDefinition")]
     public int maxHealth;
     public int currentHealth;
@@ -20,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     public int gold;
 
     public PlayerModifiers modifiers;
+    private AudioSource audioSource;
 
     // ── Computed getters ──────────────────────────────────────────
     public float GetDamage() => baseDamage * damageMultiplier;
@@ -31,7 +36,9 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         modifiers = GetComponentInChildren<PlayerModifiers>();
-        Debug.Log("Modifiers found: " + modifiers);
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
     }
     // ── Health API ────────────────────────────────────────────────
     public void Init(int startingHealth)
@@ -54,6 +61,13 @@ public class PlayerStats : MonoBehaviour
 
         currentHealth -= amount;
         Debug.Log($"Player HP: {currentHealth} / {maxHealth}");
+
+        // Play hit feedback sound
+        if (currentHealth > 0 && heroDef != null && heroDef.getHitSFX != null)
+        {
+            audioSource.PlayOneShot(heroDef.getHitSFX);
+        }
+
         if (currentHealth <= 0)
             Die();
     }
@@ -66,6 +80,13 @@ public class PlayerStats : MonoBehaviour
     void Die()
     {
         Debug.Log("Player died!");
+
+        // Use static world position sound emitter so death audio survives object destruction
+        if (heroDef != null && heroDef.dieSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(heroDef.dieSFX, transform.position);
+        }
+
         // TODO: game over
     }
 

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   speed: 12
-  lifetime: 3
-  hitRadius: 0.3
+  lifetime: 1
+  hitRadius: 1
   piercing: 0
-  projectilePrefab: {fileID: 5933582106747766449, guid: 9dc94fdcb36c67a419fd11678b572648, type: 3}
-  impactVFXPrefab: {fileID: 2892878016725166904, guid: e1a327ce695e08c49b9b6e39100c8173, type: 3}
+  projectilePrefab: {fileID: 4755594161209711728, guid: 2489c7029e0e1374f8ef86a0e7bbf767, type: 3}
+  impactVFXPrefab: {fileID: 380034906304533835, guid: 24abd7904054e4d47af1b1a7e974fd0f, type: 3}
   impactVFXLifetime: 0.5

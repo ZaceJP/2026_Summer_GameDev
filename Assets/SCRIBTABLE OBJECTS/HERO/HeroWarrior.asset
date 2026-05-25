@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroName: Warrior
   heroClass: 1
-  portrait: {fileID: 21300000, guid: e02d90fd57af3f749971fe837f7e7a19, type: 3}
+  portrait: {fileID: 21300000, guid: 038bd8560b15d63438d776f63135c6e9, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 58a8ca86296b455409bfd5f704b592b6, type: 3}
   maxHealth: 100
   moveSpeed: 10
@@ -22,4 +22,12 @@ MonoBehaviour:
   baseDamage: 10
   attackRange: 3
   primaryAttack: {fileID: 11400000, guid: c0c290e0c57c569499364d1c2f9c1933, type: 2}
-  secondaryAttack: {fileID: 0}
+  secondaryAttack: {fileID: 11400000, guid: 8789440fc7cc2b348b34a205217a938c, type: 2}
+  specialSkill1: {fileID: 0}
+  specialSkill2: {fileID: 0}
+  getHitSFX: {fileID: 0}
+  dieSFX: {fileID: 0}
+  primaryAttackSFX: {fileID: 8300000, guid: c9296542a0ff1a948a5d7fbdb90d4639, type: 3}
+  secondaryAttackSFX: {fileID: 8300000, guid: f91e02759a134284c971fd87d608194c, type: 3}
+  specialSkill1SFX: {fileID: 0}
+  specialSkill2SFX: {fileID: 0}

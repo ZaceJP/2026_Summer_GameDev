@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   lifetime: 3
-  hitRadius: 0.3
+  hitRadius: 1
   piercing: 0
   projectilePrefab: {fileID: 5933582106747766449, guid: 096b0a96e9147244cba58c99c1f638c4, type: 3}
   impactVFXPrefab: {fileID: 2892878016725166904, guid: e1a327ce695e08c49b9b6e39100c8173, type: 3}

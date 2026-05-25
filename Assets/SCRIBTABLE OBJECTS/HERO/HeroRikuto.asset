@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroName: Rikuto
   heroClass: 3
-  portrait: {fileID: 21300000, guid: 43bf82c5057728f49af90cd1133735b9, type: 3}
+  portrait: {fileID: 21300000, guid: bcb2cf0e1feb6534993c6af6396cb65b, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 89c626c4cf4e7d1408a6e95fb193164b, type: 3}
   maxHealth: 100
   moveSpeed: 5
@@ -23,3 +23,11 @@ MonoBehaviour:
   attackRange: 2
   primaryAttack: {fileID: 11400000, guid: 1220bd449b2f44d48812a656f0c2823f, type: 2}
   secondaryAttack: {fileID: 0}
+  specialSkill1: {fileID: 0}
+  specialSkill2: {fileID: 0}
+  getHitSFX: {fileID: 0}
+  dieSFX: {fileID: 0}
+  primaryAttackSFX: {fileID: 0}
+  secondaryAttackSFX: {fileID: 0}
+  specialSkill1SFX: {fileID: 0}
+  specialSkill2SFX: {fileID: 0}

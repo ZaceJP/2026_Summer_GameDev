@@ -11,11 +11,17 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime;
 
     private PlayerStats stats;
+    private AudioSource audioSource;
 
     private void Start()
     {
         stats = GetComponent<PlayerStats>();
         aimDirection = Vector3.forward;
+
+        // Ensure we have an AudioSource component ready
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -31,25 +37,45 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack()
     {
         if (heroDef == null || heroDef.primaryAttack == null) return;
-        PerformAttack(heroDef.primaryAttack);
+        
+        PerformAttack(heroDef.primaryAttack, heroDef.primaryAttackSFX);
     }
 
     // Called by Right Click (Make sure this action exists in your Input Actions asset)
     public void OnSecondaryAttack()
     {
         if (heroDef == null || heroDef.secondaryAttack == null) return;
-        PerformAttack(heroDef.secondaryAttack);
+        PerformAttack(heroDef.secondaryAttack, heroDef.secondaryAttackSFX);
     }
 
+    // Called by Q Key / Controller North (Triangle/Y)
+    public void OnSpecial1()
+    {
+        if (heroDef == null || heroDef.specialSkill1 == null) return;
+        PerformAttack(heroDef.specialSkill1, heroDef.specialSkill1SFX);
+    }
+
+    // Called by E Key / Controller East (Circle/B)
+    public void OnSpecial2()
+    {
+        if (heroDef == null || heroDef.specialSkill2 == null) return;
+        PerformAttack(heroDef.specialSkill2, heroDef.specialSkill2SFX);
+    }
     // ########## COMBAT LOGIC ##########
 
-    private void PerformAttack(AttackData data)
+    private void PerformAttack(AttackData data, AudioClip sfxClip)
     {
         // Use PlayerStats attack speed if available, otherwise use default SO cooldown
         float cooldown = stats != null ? 1f / stats.GetAttackSpeed() : data.cooldown;
 
         if (Time.time < lastAttackTime + cooldown) return;
         lastAttackTime = Time.time;
+
+        // Play the attack sound effect safely if assigned
+        if (audioSource != null && sfxClip != null)
+        {
+            audioSource.PlayOneShot(sfxClip);
+        }
 
         if (data.attackType == AttackType.Melee)
             AttackMelee(data);
@@ -93,11 +119,19 @@ public class PlayerAttack : MonoBehaviour
             float visualLength = range;
             float visualWidth = areaSize * 1.5f;
 
+            Vector3 baseScale = data.slashVFXPrefab.transform.localScale;
+
             slash.transform.localScale =
                 new Vector3(
-                    visualWidth,
-                    1f,
-                    visualLength
+                    baseScale.x *
+                    visualWidth *
+                    data.slashVisualScale.x,
+
+                    baseScale.y,
+
+                    baseScale.z *
+                    visualLength *
+                    data.slashVisualScale.y
                 );
 
             Destroy(slash, data.slashVFXLifetime);

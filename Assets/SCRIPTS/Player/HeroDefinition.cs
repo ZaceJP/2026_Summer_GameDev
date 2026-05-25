@@ -19,5 +19,16 @@ public class HeroDefinition : ScriptableObject
     [Header("Skills")]
     public AttackData primaryAttack;    // left click / main attack
     public AttackData secondaryAttack;  // right click / skill — null if none
-    // expand later: public SkillData[] skillSlots;
+    public AttackData specialSkill1;    // Q Key / Controller North (Triangle)
+    public AttackData specialSkill2;    // E Key / Controller East (Circle)
+
+    [Header("Voice & Status SFX")]
+    public AudioClip getHitSFX;
+    public AudioClip dieSFX;
+
+    [Header("Combat SFX")]
+    public AudioClip primaryAttackSFX;
+    public AudioClip secondaryAttackSFX;
+    public AudioClip specialSkill1SFX;
+    public AudioClip specialSkill2SFX;
 }
