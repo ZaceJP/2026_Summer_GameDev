@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832ee8ada23a1fd45add05ed0b6fe977, type: 3}
+  m_Name: DreamOrb
+  m_EditorClassIdentifier: 
+  speed: 6
+  lifetime: 2
+  hitRadius: 1
+  piercing: 0
+  projectilePrefab: {fileID: 5051701411101734019, guid: 556ea288404fa54429a1b902de3e2ca2, type: 3}
+  impactVFXPrefab: {fileID: 380034906304533835, guid: 24abd7904054e4d47af1b1a7e974fd0f, type: 3}
+  impactVFXLifetime: 0.5

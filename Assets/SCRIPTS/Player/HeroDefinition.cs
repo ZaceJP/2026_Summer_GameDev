@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "NewHero", menuName = "Game/Hero Definition")]
 public class HeroDefinition : ScriptableObject
 {
@@ -21,6 +22,12 @@ public class HeroDefinition : ScriptableObject
     public AttackData secondaryAttack;  // right click / skill — null if none
     public AttackData specialSkill1;    // Q Key / Controller North (Triangle)
     public AttackData specialSkill2;    // E Key / Controller East (Circle)
+
+    [Header("Skill Icons")]
+    public Sprite primaryAttackIcon;
+    public Sprite secondaryAttackIcon;
+    public Sprite skill1Icon;
+    public Sprite skill2Icon;
 
     [Header("Voice & Status SFX")]
     public AudioClip getHitSFX;

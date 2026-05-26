@@ -28,6 +28,9 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
+        transform.rotation =
+        Quaternion.Euler(45f, 0f, 0f);
+
         FindPlayer();
     }
 
@@ -52,6 +55,24 @@ public class CameraFollow : MonoBehaviour
                 : CursorLockMode.None;
 
             Cursor.visible = !firstPersonMode;
+
+            // SWITCHING BACK TO THIRD PERSON
+            if (!firstPersonMode)
+            {
+                currentLookAhead = Vector3.zero;
+
+                transform.rotation =
+                    Quaternion.Euler(45f, 0f, 0f);
+
+                transform.position =
+                    target.position + offset;
+            }
+            else
+            {
+                // entering first person
+                yaw = target.eulerAngles.y;
+                pitch = 0f;
+            }
         }
     }
 
@@ -105,7 +126,7 @@ public class CameraFollow : MonoBehaviour
                 followSpeed * Time.deltaTime
             );
 
-        transform.LookAt(target.position + Vector3.up * 1.5f);
+        
     }
 
     void HandleFirstPerson()

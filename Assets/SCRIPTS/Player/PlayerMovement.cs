@@ -30,15 +30,33 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canMove) return;
 
-        // MOVE
+        Camera cam = Camera.main;
+
+        // CAMERA-RELATIVE DIRECTIONS
+        Vector3 forward = cam.transform.forward;
+        Vector3 right = cam.transform.right;
+
+        // Ignore vertical tilt
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        // Movement relative to camera
         Vector3 moveDirection =
-            new Vector3(moveInput.x, 0f, moveInput.y);
+            forward * moveInput.y +
+            right * moveInput.x;
 
+        // MOVE
         controller.Move(
-            moveDirection * stats.GetMoveSpeed() * Time.deltaTime);
+            moveDirection *
+            stats.GetMoveSpeed() *
+            Time.deltaTime
+        );
 
-        // ROTATE
-        if (moveDirection != Vector3.zero)
+        // ROTATE CHARACTER
+        if (moveDirection.sqrMagnitude > 0.01f)
         {
             transform.forward = moveDirection;
         }

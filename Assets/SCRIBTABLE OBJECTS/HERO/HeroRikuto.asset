@@ -21,13 +21,13 @@ MonoBehaviour:
   attackSpeed: 1
   baseDamage: 10
   attackRange: 2
-  primaryAttack: {fileID: 11400000, guid: 1220bd449b2f44d48812a656f0c2823f, type: 2}
-  secondaryAttack: {fileID: 0}
+  primaryAttack: {fileID: 11400000, guid: b0f279be13c19304f8725140f5cf4108, type: 2}
+  secondaryAttack: {fileID: 11400000, guid: 87734e2552731ea4b845940352ec8688, type: 2}
   specialSkill1: {fileID: 0}
   specialSkill2: {fileID: 0}
   getHitSFX: {fileID: 0}
   dieSFX: {fileID: 0}
-  primaryAttackSFX: {fileID: 0}
-  secondaryAttackSFX: {fileID: 0}
+  primaryAttackSFX: {fileID: 8300000, guid: c2a5ed4a159ced84dbef20e7dca7264b, type: 3}
+  secondaryAttackSFX: {fileID: 8300000, guid: cb64935398b199d49893ace8f4909182, type: 3}
   specialSkill1SFX: {fileID: 0}
   specialSkill2SFX: {fileID: 0}
