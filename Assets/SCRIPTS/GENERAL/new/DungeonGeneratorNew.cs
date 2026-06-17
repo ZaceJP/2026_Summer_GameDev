@@ -187,6 +187,7 @@ public class DungeonGeneratorNew : MonoBehaviour
 
         ReplaceFurthestRoomWithBossRoom();
         ReplaceDeadEnds();
+
     }
 
     void SpawnSelectedHero(GameObject startRoom)

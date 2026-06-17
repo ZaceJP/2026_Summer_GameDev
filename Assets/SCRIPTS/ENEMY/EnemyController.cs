@@ -18,7 +18,10 @@ public class EnemyController : MonoBehaviour
     private CharacterController controller;
     private RoomEncounter room;
 
+    private Animator animator;
     private AudioSource audioSource;
+
+    private bool isDead;
 
     private void Start()
     {
@@ -26,6 +29,8 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Enemy room found: " + room);
         controller = GetComponent<CharacterController>();
         currentHealth = data.maxHealth;
+
+        animator = GetComponentInChildren<Animator>();
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -40,6 +45,9 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead)
+            return;
+
         if (player == null)
         {
             GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -64,6 +72,13 @@ public class EnemyController : MonoBehaviour
             else
                 TryAttack();
         }
+        else
+        {
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 0f);
+            }
+        }
     }
 
     void MoveTowardsPlayer()
@@ -80,6 +95,11 @@ public class EnemyController : MonoBehaviour
         move.y = -1f;
         controller.Move(move * Time.deltaTime);
 
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", 1f);
+        }
+
         if (direction != Vector3.zero)
             transform.forward = direction;
     }
@@ -90,6 +110,11 @@ public class EnemyController : MonoBehaviour
 
         if (Time.time < lastAttackTime + data.attackData.cooldown) return;
         lastAttackTime = Time.time;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        }
 
         // Ranged
         if (data.attackData.attackType == AttackType.Projectile
@@ -124,8 +149,11 @@ public class EnemyController : MonoBehaviour
         );
 
         currentHealth -= amount;
-        Debug.Log($"Enemy HP: {currentHealth} / {data.maxHealth}");
-
+        if (animator != null)
+        {
+            animator.SetTrigger("GetHit");
+        }
+        
         // Play enemy hurt audio
         if (currentHealth > 0 && data != null && data.getHitSFX != null)
         {
@@ -146,6 +174,10 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("DIE FUNCTION CALLED");
 
+        if (animator != null)
+        {
+            animator.SetBool("isDead", true);
+        }
         // Instantiates a temporary dummy object that plays the audio, then automatically destroys itself.
         // This ensures the death sound doesn't get clipped when the enemy GameObject is destroyed.
         if (data != null && data.dieSFX != null)
@@ -163,6 +195,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("ROOM IS NULL");
         }
 
-        Destroy(gameObject);
+        isDead = true;
+        Destroy(gameObject, 2f);
     }
 }

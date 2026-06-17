@@ -88,7 +88,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 6666114102336842687}
+  - {fileID: 6223673999752523539}
 --- !u!114 &2021541472439295045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,9 +880,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4477668387493345200, guid: 2aa54ccc4610b974793d0d5f80474bed, type: 3}
   m_PrefabInstance: {fileID: 298562627509998709}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6666114102336842687 stripped
+--- !u!114 &6223673999752523539 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6387932027793096650, guid: 2aa54ccc4610b974793d0d5f80474bed, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5943163435295816550, guid: 2aa54ccc4610b974793d0d5f80474bed, type: 3}
   m_PrefabInstance: {fileID: 298562627509998709}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

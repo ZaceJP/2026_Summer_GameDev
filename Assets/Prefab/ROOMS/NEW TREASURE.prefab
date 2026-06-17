@@ -179,6 +179,7 @@ Transform:
   - {fileID: 1503445560546822194}
   - {fileID: 6251354928491997828}
   - {fileID: 8024234808801961177}
+  - {fileID: 3191944461683453774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &39393236320974682
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doors:
   - {fileID: 0}
-  - {fileID: 1446450591911607681}
+  - {fileID: 2219983056920148269}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &2021541472439295045
@@ -235,6 +236,72 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 47.8247, y: 3.4823499, z: 46.913933}
   m_Center: {x: 0.010673523, y: 1.2411749, z: 0.064590454}
+--- !u!1 &4635832984256638788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3191944461683453774}
+  - component: {fileID: 3515592614445262831}
+  - component: {fileID: 6497887797753508723}
+  m_Layer: 0
+  m_Name: BOSSROOMTRIGGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3191944461683453774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635832984256638788}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.2251277, y: 0.51, z: -15.561798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062962556448259832}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3515592614445262831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635832984256638788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01ecda6d5a93484d85f2e616898459e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &6497887797753508723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635832984256638788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 34.897736, y: 3.8211184, z: 33.340977}
+  m_Center: {x: -1.900898, y: 1.4105592, z: 8.811907}
 --- !u!1 &7799598660183350098
 GameObject:
   m_ObjectHideFlags: 0
@@ -12256,9 +12323,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa54ccc4610b974793d0d5f80474bed, type: 3}
---- !u!114 &1446450591911607681 stripped
+--- !u!114 &2219983056920148269 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6387932027793096650, guid: 2aa54ccc4610b974793d0d5f80474bed, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5943163435295816550, guid: 2aa54ccc4610b974793d0d5f80474bed, type: 3}
   m_PrefabInstance: {fileID: 5527233356182962763}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

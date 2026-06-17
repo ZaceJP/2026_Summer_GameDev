@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -244, y: 105}
+  m_AnchoredPosition: {x: -165.2, y: 171.3}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1787345195565914891
@@ -704,14 +704,14 @@ MonoBehaviour:
   secondaryInputImage: {fileID: 5888035726230078816}
   skill1InputImage: {fileID: 2957114083081843784}
   skill2InputImage: {fileID: 900341650233759894}
-  lmbIcon: {fileID: 0}
-  rmbIcon: {fileID: 0}
-  qIcon: {fileID: 0}
-  eIcon: {fileID: 0}
-  xButtonIcon: {fileID: 0}
-  squareButtonIcon: {fileID: 0}
-  triangleButtonIcon: {fileID: 0}
-  circleButtonIcon: {fileID: 0}
+  lmbIcon: {fileID: -212317832, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  rmbIcon: {fileID: 239255214, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  qIcon: {fileID: -187036330, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  eIcon: {fileID: -1693465229, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  xButtonIcon: {fileID: -1221402723, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  squareButtonIcon: {fileID: 725342653, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  triangleButtonIcon: {fileID: 1162953568, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
+  circleButtonIcon: {fileID: 1977969478, guid: 57829b8325b8ad647bb06182498e7689, type: 3}
 --- !u!1 &5922418790453558357
 GameObject:
   m_ObjectHideFlags: 0

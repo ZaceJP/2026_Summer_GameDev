@@ -128,10 +128,19 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void SetVolume(float value)
+    public void SetMusicVolume(float value)
     {
-        musicSourceA.volume = value;
-        musicSourceB.volume = value;
+        musicVolume = Mathf.Clamp01(value);
+
+        // Update whichever sources are currently playing/available
+        if (musicSourceA != null) musicSourceA.volume = musicVolume;
+        if (musicSourceB != null) musicSourceB.volume = musicVolume;
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        sfxVolume = Mathf.Clamp01(value);
+        if (sfxSource != null) sfxSource.volume = sfxVolume;
     }
 
     //  New helper for playing SFX

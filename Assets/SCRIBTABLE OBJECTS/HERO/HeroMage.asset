@@ -25,6 +25,10 @@ MonoBehaviour:
   secondaryAttack: {fileID: 11400000, guid: 87734e2552731ea4b845940352ec8688, type: 2}
   specialSkill1: {fileID: 0}
   specialSkill2: {fileID: 0}
+  primaryAttackIcon: {fileID: 1498579480, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
+  secondaryAttackIcon: {fileID: 1090276280, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
+  skill1Icon: {fileID: -989584947, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
+  skill2Icon: {fileID: 1677195087, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
   getHitSFX: {fileID: 8300000, guid: 3438c9029f4f2504f8fb52c0e07baf40, type: 3}
   dieSFX: {fileID: 8300000, guid: 01426df89fe52ea4791858f361851aa6, type: 3}
   primaryAttackSFX: {fileID: 8300000, guid: c2b3e571a231c1a49bd9964c4cec8b7c, type: 3}

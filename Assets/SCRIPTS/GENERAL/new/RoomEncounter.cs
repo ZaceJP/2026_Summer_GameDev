@@ -8,11 +8,11 @@ public class RoomEncounter : MonoBehaviour
     private int enemyCount;
     private bool roomLocked;
     private bool roomCleared;
+    private bool isReady = false;
 
     private void Awake()
     {
-        if (doors == null || doors.Length == 0)
-            doors = GetComponentsInChildren<DoorBlocker>(true);
+      
 
         EnemyController[] enemies = GetComponentsInChildren<EnemyController>(true);
         enemyCount = enemies.Length;
@@ -21,34 +21,30 @@ public class RoomEncounter : MonoBehaviour
 
     private void Start()
     {
+        if (doors == null || doors.Length == 0)
+            doors = GetComponentsInChildren<DoorBlocker>(true);
+
         UnlockAllDoors();
 
         if (enemyCount <= 0)
         {
             Debug.Log("Room is clear");
-            ClearRoom();
+            roomCleared = true; // mark cleared without triggering rewards on load
+            return;
         }
-            
+
+        isReady = true; // only arm the trigger after setup is done
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!isReady) return; // ignore any trigger hits during startup
+
         Debug.Log("Something entered trigger: " + other.name);
-
-        if (roomCleared)
-        {
-            Debug.Log("Room already cleared");
-            return;
-        }
-
-        if (!other.CompareTag("Player"))
-        {
-            Debug.Log("Not player");
-            return;
-        }
+        if (roomCleared) return;
+        if (!other.CompareTag("Player")) return;
 
         Debug.Log("PLAYER ENTERED ROOM");
-
         BeginEncounter();
     }
 

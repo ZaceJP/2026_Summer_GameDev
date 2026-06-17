@@ -87,7 +87,13 @@ public class PlayerStats : MonoBehaviour
             AudioSource.PlayClipAtPoint(heroDef.dieSFX, transform.position);
         }
 
-        // TODO: game over
+        // GAME OVER SCREEN CALL
+        if (GameEndManager.Instance != null)
+        {
+            GameEndManager.Instance.TriggerEndScreen(GameEndState.GameOver);
+        }
+
+        gameObject.SetActive(false);
     }
 
     // ── Upgrade API ───────────────────────────────────────────────
