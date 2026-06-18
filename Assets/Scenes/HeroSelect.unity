@@ -119,6 +119,87 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &22131269
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1519011836}
+    m_Modifications:
+    - target: {fileID: 3744493160964963131, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744493160964963131, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924962929031147604, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_Name
+      value: LevelTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+--- !u!4 &22131270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+  m_PrefabInstance: {fileID: 22131269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &22131271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4984862227866471912, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+  m_PrefabInstance: {fileID: 22131269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514b27ea2ebefd14a92d06997ed1f6ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &51964503
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9398ff2b465e6747bfe8751335bc241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTransitionScript: {fileID: 22131271}
   heroSelection: {fileID: 11400000, guid: b6a544c6bd28fe7489b212941dceddbe, type: 2}
   warriorDefinition: {fileID: 11400000, guid: f4843b8e29f76494d8a0a1e0e9858b6c, type: 2}
   mageDefinition: {fileID: 11400000, guid: e7aec6a3a54ae1145967414971da1766, type: 2}
@@ -2229,6 +2311,7 @@ RectTransform:
   - {fileID: 318355510}
   - {fileID: 1527128104}
   - {fileID: 176936818}
+  - {fileID: 22131270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

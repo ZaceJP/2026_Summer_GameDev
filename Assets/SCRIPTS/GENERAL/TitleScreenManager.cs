@@ -25,6 +25,9 @@ public class TitleScreenManager : MonoBehaviour
     public GameObject exitMenuCam;   // Drag vcam_ExitMenu here
     public GameObject startGameCam;  // Drag vcam_StartGame here
 
+    [Header("Global Systems Connection")]
+    public LevelTransition levelTransitionScript;
+
     [Header("Timing Configuration")]
     [Tooltip("Time it takes for camera to move to Options or Exit view")]
     public float standardBlendTime = 1.5f;
@@ -53,7 +56,7 @@ public class TitleScreenManager : MonoBehaviour
     // ==========================================
     // 1. PLAY / PORTAL SEQUENCE
     // ==========================================
-    private void OnPlayPressed()
+    public void OnPlayPressed()
     {
         if (MusicManager.Instance != null)
             MusicManager.Instance.PlaySFX(MusicManager.Instance.confirmSound);
@@ -73,11 +76,21 @@ public class TitleScreenManager : MonoBehaviour
         // Optional: If you have a screen fade-to-black script, trigger it here!
         // e.g., FadeManager.Instance.FadeToBlack(portalFlyThroughTime);
 
-        // Wait for the camera to completely pass through the portal
-        yield return new WaitForSeconds(portalFlyThroughTime);
+        // Calculate when the fade needs to trigger so it finishes EXACTLY when fly through finishes
+        // E.g., if fly-through is 2.0s, and fade is 1.0s, we wait 1.0s before firing the fade.
+        float delayBeforeFade = Mathf.Max(0, portalFlyThroughTime - levelTransitionScript.transitionTime);
+        yield return new WaitForSeconds(delayBeforeFade);
 
-        // Load the next scene seamlessly
-        SceneManager.LoadScene("HeroSelect");
+        // Hand off the transition animation and the scene load entirely to your other system
+        if (levelTransitionScript != null)
+        {
+            levelTransitionScript.LoadSceneByName("HeroSelect");
+        }
+        else
+        {
+            Debug.LogError("Assign LevelTransition script component to TitleScreenManager!");
+            
+        }
     }
 
     // ==========================================

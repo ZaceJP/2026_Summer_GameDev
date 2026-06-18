@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class HeroSelectManager : MonoBehaviour
 {
+    [Header("Global Systems Connection")]
+    public LevelTransition levelTransitionScript;
+
     public HeroSelection heroSelection;     // drag the HeroSelection SO here
     public HeroDefinition warriorDefinition;
     public HeroDefinition mageDefinition;
@@ -29,8 +32,11 @@ public class HeroSelectManager : MonoBehaviour
         {
             Debug.LogWarning("No hero selected!");
             return;
-        }
 
-        SceneManager.LoadScene("GameScene");
+        }
+        if (levelTransitionScript != null)
+        {
+            levelTransitionScript.LoadSceneByName("GameScene");
+        }
     }
 }
