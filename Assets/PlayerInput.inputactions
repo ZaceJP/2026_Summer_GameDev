@@ -161,7 +161,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -183,7 +183,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": ";Gamepad",
                     "action": "SecondaryAttack",
                     "isComposite": false,
                     "isPartOfComposite": false

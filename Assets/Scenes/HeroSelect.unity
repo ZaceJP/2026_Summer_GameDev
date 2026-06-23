@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 7855469550534240424, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -450,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1344507747}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &271566112
@@ -724,6 +728,7 @@ GameObject:
   - component: {fileID: 613046912}
   - component: {fileID: 613046911}
   - component: {fileID: 613046913}
+  - component: {fileID: 613046914}
   m_Layer: 5
   m_Name: HeroImage
   m_TagString: Untagged
@@ -844,6 +849,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &613046914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613046909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!1 &645715140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,6 +1859,7 @@ GameObject:
   - component: {fileID: 1344507751}
   - component: {fileID: 1344507750}
   - component: {fileID: 1344507749}
+  - component: {fileID: 1344507752}
   m_Layer: 5
   m_Name: HeroImage
   m_TagString: Untagged
@@ -1959,6 +1980,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344507747}
   m_CullTransparentMesh: 1
+--- !u!114 &1344507752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344507747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!1 &1445467982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,6 +2128,7 @@ GameObject:
   - component: {fileID: 1449999960}
   - component: {fileID: 1449999959}
   - component: {fileID: 1449999958}
+  - component: {fileID: 1449999961}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -2212,6 +2249,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449999956}
   m_CullTransparentMesh: 1
+--- !u!114 &1449999961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449999956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.12
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!1 &1519011832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2901,6 +2953,7 @@ GameObject:
   - component: {fileID: 1846816125}
   - component: {fileID: 1846816124}
   - component: {fileID: 1846816123}
+  - component: {fileID: 1846816126}
   m_Layer: 5
   m_Name: HeroImage
   m_TagString: Untagged
@@ -3021,6 +3074,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846816121}
   m_CullTransparentMesh: 1
+--- !u!114 &1846816126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846816121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!1 &1946275929
 GameObject:
   m_ObjectHideFlags: 0

@@ -3443,6 +3443,7 @@ GameObject:
   - component: {fileID: 319661302}
   - component: {fileID: 319661301}
   - component: {fileID: 319661300}
+  - component: {fileID: 319661303}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -3552,6 +3553,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319661298}
   m_CullTransparentMesh: 1
+--- !u!114 &319661303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319661298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!4 &321410737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2872596721437497262, guid: 2a9b8a25bc63da941a79e7e3bec1e558, type: 3}
@@ -7057,6 +7073,7 @@ GameObject:
   - component: {fileID: 653752942}
   - component: {fileID: 653752941}
   - component: {fileID: 653752940}
+  - component: {fileID: 653752943}
   m_Layer: 5
   m_Name: Yes
   m_TagString: Untagged
@@ -7166,6 +7183,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653752938}
   m_CullTransparentMesh: 1
+--- !u!114 &653752943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653752938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
 --- !u!1001 &655954197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8140,6 +8172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803371244}
   - component: {fileID: 803371245}
+  - component: {fileID: 803371246}
   m_Layer: 5
   m_Name: ControlTypeToggle
   m_TagString: Untagged
@@ -8217,6 +8250,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &803371246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803371243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
 --- !u!1001 &807552875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10254,6 +10302,7 @@ GameObject:
   - component: {fileID: 1117492285}
   - component: {fileID: 1117492284}
   - component: {fileID: 1117492283}
+  - component: {fileID: 1117492286}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -10363,6 +10412,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117492281}
   m_CullTransparentMesh: 1
+--- !u!114 &1117492286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117492281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!4 &1126324267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2872596721437497262, guid: 2a9b8a25bc63da941a79e7e3bec1e558, type: 3}
@@ -10776,6 +10840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1173241431}
   - component: {fileID: 1173241432}
+  - component: {fileID: 1173241433}
   m_Layer: 5
   m_Name: Music Slider
   m_TagString: Untagged
@@ -10856,6 +10921,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1173241433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173241430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
 --- !u!4 &1187720460 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5097439478928262856, guid: e6b5305ba2d44374585d001d6e5a9295, type: 3}
@@ -11537,6 +11617,7 @@ GameObject:
   - component: {fileID: 1280341095}
   - component: {fileID: 1280341094}
   - component: {fileID: 1280341093}
+  - component: {fileID: 1280341096}
   m_Layer: 5
   m_Name: Language
   m_TagString: Untagged
@@ -11668,6 +11749,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280341091}
   m_CullTransparentMesh: 1
+--- !u!114 &1280341096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280341091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
 --- !u!1001 &1285968215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12358,6 +12454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1391964408}
   - component: {fileID: 1391964409}
+  - component: {fileID: 1391964410}
   m_Layer: 5
   m_Name: SFX Slider
   m_TagString: Untagged
@@ -12438,6 +12535,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1391964410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391964407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
 --- !u!4 &1404233665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2872596721437497262, guid: 2a9b8a25bc63da941a79e7e3bec1e558, type: 3}
@@ -14517,6 +14629,7 @@ GameObject:
   - component: {fileID: 1642508520}
   - component: {fileID: 1642508519}
   - component: {fileID: 1642508518}
+  - component: {fileID: 1642508521}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -14626,6 +14739,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642508516}
   m_CullTransparentMesh: 1
+--- !u!114 &1642508521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642508516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!1 &1642773607
 GameObject:
   m_ObjectHideFlags: 0
@@ -15900,6 +16028,7 @@ GameObject:
   - component: {fileID: 1799182702}
   - component: {fileID: 1799182701}
   - component: {fileID: 1799182700}
+  - component: {fileID: 1799182703}
   m_Layer: 5
   m_Name: BACK
   m_TagString: Untagged
@@ -16009,6 +16138,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799182698}
   m_CullTransparentMesh: 1
+--- !u!114 &1799182703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799182698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9019608, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!4 &1813483855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2872596721437497262, guid: 2a9b8a25bc63da941a79e7e3bec1e558, type: 3}
@@ -17504,6 +17648,7 @@ GameObject:
   - component: {fileID: 1962924791}
   - component: {fileID: 1962924790}
   - component: {fileID: 1962924789}
+  - component: {fileID: 1962924792}
   m_Layer: 5
   m_Name: NO
   m_TagString: Untagged
@@ -17613,6 +17758,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962924787}
   m_CullTransparentMesh: 1
+--- !u!114 &1962924792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962924787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ffe79eb132c184c93db0750eadb2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  duration: 0.2
+  selectedColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
 --- !u!1 &1966140483
 GameObject:
   m_ObjectHideFlags: 0
@@ -18430,6 +18590,7 @@ MonoBehaviour:
   exitButton: {fileID: 1117492283}
   confirmExitButton: {fileID: 653752940}
   cancelExitButton: {fileID: 1962924789}
+  optionsBackButton: {fileID: 1799182700}
   mainMenuCam: {fileID: 1254852016}
   optionsMenuCam: {fileID: 481952473}
   exitMenuCam: {fileID: 1671468954}
@@ -19625,6 +19786,10 @@ PrefabInstance:
       propertyPath: transition
       value: 
       objectReference: {fileID: 2059567737}
+    - target: {fileID: 7855469550534240424, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9213961631550881751, guid: f187c9a74944a6945838bafddfdd8ad2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -964.597
