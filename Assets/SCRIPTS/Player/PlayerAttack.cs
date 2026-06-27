@@ -65,6 +65,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void PerformAttack(AttackData data, AudioClip sfxClip)
     {
+
         // Use PlayerStats attack speed if available, otherwise use default SO cooldown
         float cooldown = stats != null ? 1f / stats.GetAttackSpeed() : data.cooldown;
 
@@ -85,98 +86,128 @@ public class PlayerAttack : MonoBehaviour
 
     void AttackMelee(AttackData data)
     {
-        Vector3 origin =
-            transform.position + aimDirection * data.meleeOffset;
 
-        // RANGE = how far attack reaches
         float range =
             stats != null
             ? stats.GetAttackRange()
             : data.attackRange;
 
-        // AREA SIZE = how wide/thick the slash becomes
         float areaSize =
             stats != null
             ? stats.modifiers.areaSizeMultiplier
             : 1f;
 
-        // VISUAL SLASH
+        // ==========================
+        // VFX
+        // ==========================
+
         if (data.slashVFXPrefab != null)
         {
-            // Position visual exactly where hitbox is
-            Vector3 visualCenter =
-                transform.position +
-                aimDirection * data.meleeOffset;
+            Vector3 visualPos;
+
+            if (data.attackShape == AttackShape.Circle)
+            {
+                visualPos = transform.position;
+            }
+            else
+            {
+                visualPos =
+                    transform.position +
+                    aimDirection * data.meleeOffset;
+            }
 
             GameObject slash =
                 Instantiate(
                     data.slashVFXPrefab,
-                    visualCenter,
+                    visualPos,
                     Quaternion.LookRotation(aimDirection)
-                );
-
-            // Match actual hitbox size
-            float visualLength = range;
-            float visualWidth = areaSize * 1.5f;
-
-            Vector3 baseScale = data.slashVFXPrefab.transform.localScale;
-
-            slash.transform.localScale =
-                new Vector3(
-                    baseScale.x *
-                    visualWidth *
-                    data.slashVisualScale.x,
-
-                    baseScale.y,
-
-                    baseScale.z *
-                    visualLength *
-                    data.slashVisualScale.y
                 );
 
             Destroy(slash, data.slashVFXLifetime);
         }
 
-        // Hit detection
-        Vector3 boxHalfExtents =
-     new Vector3(
-         areaSize * 0.75f,
-         1f,
-         range * 0.5f
-     );
+        // ==========================
+        // HIT DETECTION
+        // ==========================
 
-        Vector3 boxCenter =
-            transform.position +
-            aimDirection * (range);
+        Collider[] hits;
 
-        Collider[] hits =
-            Physics.OverlapBox(
+        if (data.attackShape == AttackShape.Circle)
+        {
+            hits = Physics.OverlapSphere(
+                transform.position,
+                range
+            );
+
+            Debug.Log("Sphere Hits: " + hits.Length);
+        }
+        else
+        {
+            Vector3 boxHalfExtents =
+                new Vector3(
+                    areaSize * 0.75f,
+                    1f,
+                    range * 0.5f
+                );
+
+            Vector3 boxCenter =
+                transform.position +
+                aimDirection * (range * 0.5f);
+
+            hits = Physics.OverlapBox(
                 boxCenter,
                 boxHalfExtents,
                 Quaternion.LookRotation(aimDirection)
             );
 
-        foreach (var hit in hits)
+            Debug.Log("Box Hits: " + hits.Length);
+        }
+
+        // ==========================
+        // DAMAGE + KNOCKBACK
+        // ==========================
+
+        foreach (Collider hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
+            Debug.Log("Collider Hit: " + hit.name);
+            if (!hit.CompareTag("Enemy"))
+                continue;
+
+            EnemyController enemy =
+                hit.GetComponent<EnemyController>();
+            Debug.Log("Enemy Found: " + enemy);
+
+            if (enemy == null)
+                continue;
+
+            int damage =
+                stats != null
+                ? (int)stats.GetDamage()
+                : data.damage;
+
+            enemy.TakeDamage(damage);
+
+            if (data.applyKnockback)
             {
-                EnemyController enemy =
-                    hit.GetComponent<EnemyController>();
+                Vector3 knockDir;
 
-                if (enemy != null)
+                if (data.attackShape == AttackShape.Circle)
                 {
-                    int damage =
-                        stats != null
-                        ? (int)stats.GetDamage()
-                        : data.damage;
-
-                    enemy.TakeDamage(damage);
-
-                    Vector3 knockDir =
-                     (enemy.transform.position - transform.position).normalized;
-
-                    enemy.ApplyKnockback(knockDir, 6f);
+                    // Push away from player in all directions
+                    knockDir =
+                        (enemy.transform.position -
+                         transform.position).normalized;
                 }
+                else
+                {
+                    // Push in attack direction
+                    knockDir = aimDirection;
+                }
+
+                enemy.ApplyKnockback(
+                    knockDir,
+                    data.knockbackForce
+                );
             }
         }
     }

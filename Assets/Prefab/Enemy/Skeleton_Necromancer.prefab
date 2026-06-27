@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2127780768965216477}
   - component: {fileID: 1960788246356869822}
   - component: {fileID: 898180191803355381}
+  - component: {fileID: 1121921491212543936}
   m_Layer: 0
   m_Name: Skeleton_Necromancer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,13 +70,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 3.09
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.83, z: 0}
+  m_Center: {x: 0, y: 1.35, z: 0}
 --- !u!65 &898180191803355381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -97,6 +98,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.216684, y: 2.6356347, z: 1}
   m_Center: {x: -0.010029018, y: 1.3920668, z: 0}
+--- !u!95 &1121921491212543936
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678357832202940006}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: cb33a48699d642c99396b004ffbfbd1c, type: 3}
+  m_Controller: {fileID: 9100000, guid: 433f344bf8c83d54fa46f26936c43556, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6450694824611988546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,6 +132,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 433f344bf8c83d54fa46f26936c43556, type: 2}
+    - target: {fileID: 2235013731079262662, guid: 2e8d4d8b90cb4e55a2de54b985b53a2c, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235013731079262662, guid: 2e8d4d8b90cb4e55a2de54b985b53a2c, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235013731079262662, guid: 2e8d4d8b90cb4e55a2de54b985b53a2c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4805236750560792838, guid: 2e8d4d8b90cb4e55a2de54b985b53a2c, type: 3}
       propertyPath: m_Name
       value: SKM_Skeleton_Necromancer
@@ -165,7 +200,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2235013731079262662, guid: 2e8d4d8b90cb4e55a2de54b985b53a2c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

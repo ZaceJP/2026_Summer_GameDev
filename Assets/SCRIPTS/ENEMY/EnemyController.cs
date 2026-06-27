@@ -108,37 +108,104 @@ public class EnemyController : MonoBehaviour
     {
         if (data.attackData == null) return;
 
-        if (Time.time < lastAttackTime + data.attackData.cooldown) return;
+        if (Time.time < lastAttackTime + data.attackData.cooldown)
+            return;
+
         lastAttackTime = Time.time;
 
         if (animator != null)
         {
             animator.SetTrigger("Attack");
         }
+    }
 
-        // Ranged
-        if (data.attackData.attackType == AttackType.Projectile
-            && data.attackData.projectileData?.projectilePrefab != null)
+    public void DealMeleeHit()
+    {
+        float range = data.attackData.attackRange;
+
+        // Spawn slash effect
+        if (data.attackData.slashVFXPrefab != null)
         {
-            Vector3 dir = (player.position - transform.position);
-            dir.y = 0;
-            dir.Normalize();
+            Vector3 vfxPos =
+                transform.position +
+                transform.forward * data.attackData.meleeOffset;
 
-            Vector3 spawnPos = transform.position + dir * 0.6f + Vector3.up * 0.5f;
-            GameObject obj = Instantiate(data.attackData.projectileData.projectilePrefab,
-                                         spawnPos, Quaternion.LookRotation(dir));
-            Projectile p = obj.AddComponent<Projectile>();
-            p.Init(data.attackData.projectileData, dir, "Player", data.attackData.damage);
-            return;
+            GameObject slash =
+                Instantiate(
+                    data.attackData.slashVFXPrefab,
+                    vfxPos,
+                    Quaternion.LookRotation(transform.forward)
+                );
+
+            Destroy(slash, data.attackData.slashVFXLifetime);
         }
 
-        // Melee
-        PlayerStats stats = player.GetComponent<PlayerStats>();
-        if (stats != null)
+        // Existing hit detection
+
+        Vector3 center =
+            transform.position +
+            transform.forward * (range * 0.5f);
+
+        Vector3 halfExtents =
+            new Vector3(
+                0.75f,
+                1f,
+                range * 0.5f
+            );
+
+        Collider[] hits =
+            Physics.OverlapBox(
+                center,
+                halfExtents,
+                transform.rotation
+            );
+
+        foreach (Collider hit in hits)
         {
-            stats.TakeDamage(data.attackData.damage);
-            Debug.Log("Enemy hit player for " + data.attackData.damage);
+            if (hit.CompareTag("Player"))
+            {
+                PlayerStats player =
+                    hit.GetComponent<PlayerStats>();
+
+                if (player != null)
+                {
+                    player.TakeDamage(data.attackData.damage);
+                }
+            }
         }
+    }
+
+    public void SpawnProjectileFromAnimation()
+    {
+        if (data.attackData == null) return;
+
+        Vector3 dir = (player.position - transform.position);
+        dir.y = 0;
+        dir.Normalize();
+
+        Vector3 spawnPos =
+            transform.position +
+            dir * 0.6f +
+            Vector3.up * 0.5f;
+
+        GameObject obj =
+            Instantiate(
+                data.attackData.projectileData.projectilePrefab,
+                spawnPos,
+                Quaternion.LookRotation(dir)
+            );
+
+        Projectile p = obj.GetComponent<Projectile>();
+
+        if (p == null)
+            p = obj.AddComponent<Projectile>();
+
+        p.Init(
+            data.attackData.projectileData,
+            dir,
+            "Player",
+            data.attackData.damage
+        );
     }
 
     public void TakeDamage(int amount)
@@ -149,19 +216,17 @@ public class EnemyController : MonoBehaviour
         );
 
         currentHealth -= amount;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
+
         if (animator != null)
         {
             animator.SetTrigger("GetHit");
         }
-        
-        // Play enemy hurt audio
-        if (currentHealth > 0 && data != null && data.getHitSFX != null)
-        {
-            audioSource.PlayOneShot(data.getHitSFX);
-        }
-
-        if (currentHealth <= 0)
-            Die();
     }
 
     public void ApplyKnockback(Vector3 direction, float force)
@@ -196,6 +261,6 @@ public class EnemyController : MonoBehaviour
         }
 
         isDead = true;
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 5f);
     }
 }

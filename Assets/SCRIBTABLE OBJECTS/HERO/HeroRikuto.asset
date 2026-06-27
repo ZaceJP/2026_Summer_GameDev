@@ -17,12 +17,12 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: bcb2cf0e1feb6534993c6af6396cb65b, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 89c626c4cf4e7d1408a6e95fb193164b, type: 3}
   maxHealth: 100
-  moveSpeed: 5
+  moveSpeed: 10
   attackSpeed: 1
   baseDamage: 10
   attackRange: 2
   primaryAttack: {fileID: 11400000, guid: b0f279be13c19304f8725140f5cf4108, type: 2}
-  secondaryAttack: {fileID: 11400000, guid: 87734e2552731ea4b845940352ec8688, type: 2}
+  secondaryAttack: {fileID: 11400000, guid: e7dae63425a5f7147b31460036cc88d8, type: 2}
   specialSkill1: {fileID: 0}
   specialSkill2: {fileID: 0}
   primaryAttackIcon: {fileID: -863316558, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
