@@ -12,9 +12,11 @@ public class PlayerAttack : MonoBehaviour
 
     private PlayerStats stats;
     private AudioSource audioSource;
+    PlayerAnimationController anim;
 
     private void Start()
     {
+        anim = GetComponent<PlayerAnimationController>();
         stats = GetComponent<PlayerStats>();
         aimDirection = Vector3.forward;
 
@@ -37,7 +39,9 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack()
     {
         if (heroDef == null || heroDef.primaryAttack == null) return;
-        
+
+        anim.PlayPrimaryAttack();
+
         PerformAttack(heroDef.primaryAttack, heroDef.primaryAttackSFX);
     }
 
@@ -45,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
     public void OnSecondaryAttack()
     {
         if (heroDef == null || heroDef.secondaryAttack == null) return;
+        anim.PlaySecondaryAttack();
         PerformAttack(heroDef.secondaryAttack, heroDef.secondaryAttackSFX);
     }
 
@@ -52,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
     public void OnSpecial1()
     {
         if (heroDef == null || heroDef.specialSkill1 == null) return;
+        anim.PlaySkill1();
         PerformAttack(heroDef.specialSkill1, heroDef.specialSkill1SFX);
     }
 
@@ -59,6 +65,7 @@ public class PlayerAttack : MonoBehaviour
     public void OnSpecial2()
     {
         if (heroDef == null || heroDef.specialSkill2 == null) return;
+        anim.PlaySkill2();
         PerformAttack(heroDef.specialSkill2, heroDef.specialSkill2SFX);
     }
     // ########## COMBAT LOGIC ##########

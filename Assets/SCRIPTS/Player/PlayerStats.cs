@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-
-public class PlayerStats : MonoBehaviour
+using System.Collections;
+public class PlayerStats : MonoBehaviour, IDamageable
 {
     [Header("References")]
     [HideInInspector] public HeroDefinition heroDef;
@@ -81,6 +81,12 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("Player died!");
 
+        PlayerAnimationController anim =
+        GetComponent<PlayerAnimationController>();
+
+        if (anim != null)
+            anim.PlayDeath();
+
         // Use static world position sound emitter so death audio survives object destruction
         if (heroDef != null && heroDef.dieSFX != null)
         {
@@ -92,6 +98,13 @@ public class PlayerStats : MonoBehaviour
         {
             GameEndManager.Instance.TriggerEndScreen(GameEndState.GameOver);
         }
+
+        StartCoroutine(DeathRoutine());
+    }
+
+    IEnumerator DeathRoutine()
+    {
+        yield return new WaitForSeconds(2.5f);
 
         gameObject.SetActive(false);
     }

@@ -14,11 +14,13 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true;
 
     PlayerStats stats;
+    PlayerAnimationController anim;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         stats = GetComponent<PlayerStats>();
+        anim = GetComponent<PlayerAnimationController>();
     }
 
     public void OnMove(InputValue value)
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             moveDirection *
             stats.GetMoveSpeed() *
             Time.deltaTime
+
         );
 
         // ROTATE CHARACTER
@@ -60,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.forward = moveDirection;
         }
+
+        anim.SetMoving(moveDirection.sqrMagnitude > 0.01f);
 
         // GRAVITY
         if (controller.isGrounded && velocity.y < 0)
@@ -70,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
     }
 
     public void EnableMovement(bool value)
