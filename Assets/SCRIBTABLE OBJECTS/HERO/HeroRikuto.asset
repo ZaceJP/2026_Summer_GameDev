@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: HeroRikuto
   m_EditorClassIdentifier: 
   heroName: Rikuto
+  heroDescription: 'Its Rikuto, he sleeps and is slow.
+
+    But his Skills are the
+    strongest.'
   heroClass: 3
   portrait: {fileID: 21300000, guid: bcb2cf0e1feb6534993c6af6396cb65b, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 89c626c4cf4e7d1408a6e95fb193164b, type: 3}

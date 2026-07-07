@@ -17,8 +17,8 @@ MonoBehaviour:
   attackRange: 3
   damage: 10
   attackShape: 0
-  applyKnockback: 0
-  knockbackForce: 3
+  applyKnockback: 1
+  knockbackForce: 50
   meleeOffset: 1.2
   slashVFXPrefab: {fileID: 0}
   slashVisualScale: {x: 0.5, y: 0.5}

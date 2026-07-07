@@ -84,7 +84,7 @@ public class TitleScreenManager : MonoBehaviour
 
         if (levelTransitionScript != null)
         {
-            levelTransitionScript.LoadSceneByName("HeroSelect");
+            levelTransitionScript.LoadSceneByName("Hero_Select");
         }
     }
 

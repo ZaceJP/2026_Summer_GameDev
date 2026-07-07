@@ -98,17 +98,15 @@ public class MenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerEx
             // Skip ourselves
             if (child == transform) continue;
 
+            MenuButtonEffects neighborEffects = child.GetComponent<MenuButtonEffects>();
+
+            if (neighborEffects == null)
+                continue;
+
             Image neighborImage = child.GetComponent<Image>();
-            if (neighborImage != null)
-            {
-                neighborImage.DOKill();
 
-                // Dimming to 65% opacity
-                Color dimColor = new Color(1.0f, 1.0f, 1.0f, 0.65f);
-
-                // FIXED: Added .SetUpdate(true) here too so neighbors fade out instantly on pause!
-                neighborImage.DOColor(dimColor, duration).SetEase(Ease.OutQuad).SetUpdate(true);
-            }
+            if (neighborImage == null)
+                continue;
         }
     }
 
@@ -134,19 +132,27 @@ public class MenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
         foreach (Transform child in parentContainer)
         {
-            if (child == transform) continue;
+            if (child == transform)
+                continue;
 
-            // Make sure neighbors don't get stuck permanently dimmed out!
             MenuButtonEffects neighborEffects = child.GetComponent<MenuButtonEffects>();
+
+            // Skip everything that isn't another menu button
+            if (neighborEffects == null)
+                continue;
+
             Image neighborImage = child.GetComponent<Image>();
 
-            if (neighborImage != null)
-            {
-                neighborImage.DOKill();
-                // If neighbor has its original color recorded, return to it. Otherwise, full opaque white.
-                Color targetColor = (neighborEffects != null) ? neighborEffects.originalColor : Color.white;
-                neighborImage.DOColor(targetColor, duration).SetEase(Ease.OutQuad).SetUpdate(true);
-            }
+            if (neighborImage == null)
+                continue;
+
+            neighborImage.DOKill();
+
+            neighborImage.DOColor(
+                neighborEffects.originalColor,
+                duration)
+                .SetEase(Ease.OutQuad)
+                .SetUpdate(true);
         }
     }
 

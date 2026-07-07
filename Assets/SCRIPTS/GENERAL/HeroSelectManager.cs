@@ -1,29 +1,61 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
+using TMPro;
 
 public class HeroSelectManager : MonoBehaviour
 {
-    [Header("Global Systems Connection")]
+    [Header("Global Systems")]
     public LevelTransition levelTransitionScript;
+    public HeroSelection heroSelection;
 
-    public HeroSelection heroSelection;     // drag the HeroSelection SO here
-    public HeroDefinition warriorDefinition;
-    public HeroDefinition mageDefinition;
-    public HeroDefinition rikutoDefinition;
-    // add more heroes here as you expand
+    [Header("UI")]
+    [SerializeField] private TMP_Text heroNameText;
+    [SerializeField] private TMP_Text heroDescriptionText;
 
-    public void SelectWarrior()
+    [SerializeField]
+    private float selectionCooldown = 2.5f;
+
+    private HeroSelectCharacter currentSelection;
+
+    private bool canSelect = true;
+
+
+    public void SelectCharacter(HeroSelectCharacter hero)
     {
-        heroSelection.selectedHero = warriorDefinition;
+        if (!canSelect)
+            return;
+
+        if (currentSelection == hero)
+            return;
+
+        canSelect = false;
+
+        if (currentSelection != null)
+            currentSelection.Deselect();
+
+        currentSelection = hero;
+        currentSelection.Select();
+
+        heroSelection.selectedHero = hero.heroDefinition;
+
+        UpdateHeroUI(hero.heroDefinition);
+
+        StartCoroutine(SelectionCooldown());
     }
 
-    public void SelectRikuto()
+    private IEnumerator SelectionCooldown()
     {
-        heroSelection.selectedHero = rikutoDefinition;
+        yield return new WaitForSeconds(selectionCooldown);
+        canSelect = true;
     }
-    public void SelectMage()
+
+    private void UpdateHeroUI(HeroDefinition hero)
     {
-        heroSelection.selectedHero = mageDefinition;
+        if (hero == null)
+            return;
+
+        heroNameText.text = hero.heroName;
+        heroDescriptionText.text = hero.heroDescription;
     }
 
     public void StartGame()
@@ -32,11 +64,8 @@ public class HeroSelectManager : MonoBehaviour
         {
             Debug.LogWarning("No hero selected!");
             return;
+        }
 
-        }
-        if (levelTransitionScript != null)
-        {
-            levelTransitionScript.LoadSceneByName("GameScene");
-        }
+        levelTransitionScript.LoadSceneByName("GameScene");
     }
 }

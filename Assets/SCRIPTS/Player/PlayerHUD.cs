@@ -7,6 +7,7 @@ public class PlayerHUD : MonoBehaviour
 {
     [Header("Player Info")]
     public Image heroImage;
+    private PlayerAttack playerAttack;
 
     // ─────────────────────────────
     // HP
@@ -25,6 +26,13 @@ public class PlayerHUD : MonoBehaviour
     public Image secondaryIcon;
     public Image skill1Icon;
     public Image skill2Icon;
+
+    [Header("Cooldown Overlays")]
+
+    public Image primaryCooldown;
+    public Image secondaryCooldown;
+    public Image skill1Cooldown;
+    public Image skill2Cooldown;
 
     // ─────────────────────────────
     // INPUT PROMPTS
@@ -89,6 +97,8 @@ public class PlayerHUD : MonoBehaviour
 
         UpdateHP();
 
+        UpdateCooldowns();
+
         DetectInputType();
     }
 
@@ -100,6 +110,9 @@ public class PlayerHUD : MonoBehaviour
     {
         GameObject player =
             GameObject.FindGameObjectWithTag("Player");
+
+        playerAttack =
+         player.GetComponent<PlayerAttack>();
 
         if (player != null)
         {
@@ -163,6 +176,31 @@ public class PlayerHUD : MonoBehaviour
                 (float)playerStats.currentHealth /
                 playerStats.maxHealth;
         }
+    }
+
+
+    void UpdateCooldowns()
+    {
+        if (playerAttack == null)
+            return;
+
+        HeroDefinition hero = playerStats.heroDef;
+
+        if (primaryCooldown != null)
+            primaryCooldown.fillAmount =
+                playerAttack.GetCooldownPercent(hero.primaryAttack);
+
+        if (secondaryCooldown != null)
+            secondaryCooldown.fillAmount =
+                playerAttack.GetCooldownPercent(hero.secondaryAttack);
+
+        if (skill1Cooldown != null)
+            skill1Cooldown.fillAmount =
+                playerAttack.GetCooldownPercent(hero.specialSkill1);
+
+        if (skill2Cooldown != null)
+            skill2Cooldown.fillAmount =
+                playerAttack.GetCooldownPercent(hero.specialSkill2);
     }
 
     // ─────────────────────────────

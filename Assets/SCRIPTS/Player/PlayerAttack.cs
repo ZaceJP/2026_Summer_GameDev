@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class PlayerAttack : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector3 aimDirection;
-    private float lastAttackTime;
+    private Dictionary<AttackData, float> attackCooldowns = new Dictionary<AttackData, float>();
+    // private float lastAttackTime;
 
     private PlayerStats stats;
     private AudioSource audioSource;
@@ -26,6 +28,21 @@ public class PlayerAttack : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
     }
 
+    private bool IsAttackReady(AttackData attack)
+    {
+        if (attack == null)
+            return false;
+
+        if (!attackCooldowns.TryGetValue(attack, out float lastUseTime))
+            return true;
+
+        return Time.time >= lastUseTime + attack.cooldown;
+    }
+
+    private void PutAttackOnCooldown(AttackData attack)
+    {
+        attackCooldowns[attack] = Time.time;
+    }
     void Update()
     {
         HandleAiming();
@@ -72,14 +89,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void PerformAttack(AttackData data, AudioClip sfxClip)
     {
+        if (!IsAttackReady(data))
+            return;
 
-        // Use PlayerStats attack speed if available, otherwise use default SO cooldown
-        float cooldown = stats != null ? 1f / stats.GetAttackSpeed() : data.cooldown;
+        PutAttackOnCooldown(data);
 
-        if (Time.time < lastAttackTime + cooldown) return;
-        lastAttackTime = Time.time;
-
-        // Play the attack sound effect safely if assigned
+        // Play attack sound
         if (audioSource != null && sfxClip != null)
         {
             audioSource.PlayOneShot(sfxClip);
@@ -196,20 +211,11 @@ public class PlayerAttack : MonoBehaviour
 
             if (data.applyKnockback)
             {
-                Vector3 knockDir;
+                Vector3 knockDir =
+                    enemy.transform.position - transform.position;
 
-                if (data.attackShape == AttackShape.Circle)
-                {
-                    // Push away from player in all directions
-                    knockDir =
-                        (enemy.transform.position -
-                         transform.position).normalized;
-                }
-                else
-                {
-                    // Push in attack direction
-                    knockDir = aimDirection;
-                }
+                knockDir.y = 0f;
+                knockDir.Normalize();
 
                 enemy.ApplyKnockback(
                     knockDir,
@@ -283,6 +289,32 @@ public class PlayerAttack : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             return hit.point;
         return transform.position;
+    }
+
+    public float GetCooldownRemaining(AttackData attack)
+    {
+        if (attack == null)
+            return 0f;
+
+        if (!attackCooldowns.TryGetValue(attack, out float lastUse))
+            return 0f;
+
+        float remaining =
+            attack.cooldown -
+            (Time.time - lastUse);
+
+        return Mathf.Max(0f, remaining);
+    }
+
+    public float GetCooldownPercent(AttackData attack)
+    {
+        if (attack == null)
+            return 0f;
+
+        if (attack.cooldown <= 0)
+            return 0f;
+
+        return GetCooldownRemaining(attack) / attack.cooldown;
     }
 
     private void OnDrawGizmosSelected()

@@ -57,7 +57,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         if (knockbackTimer > 0f)
         {
-            transform.position += knockbackVelocity * Time.deltaTime;
+            controller.Move(knockbackVelocity * Time.deltaTime);
+
             knockbackTimer -= Time.deltaTime;
             return;
         }
@@ -231,6 +232,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void ApplyKnockback(Vector3 direction, float force)
     {
+        Debug.Log("CALL KNOCKBACK");
         knockbackVelocity = direction.normalized * force;
         knockbackTimer = knockbackDuration;
     }

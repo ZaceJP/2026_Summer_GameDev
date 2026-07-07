@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b036ebab1fbdfb4ab88a4e49ae8ba17, type: 3}
   m_Name: MageSecondary
   m_EditorClassIdentifier: 
-  attackType: 1
+  attackType: 0
   cooldown: 0.5
-  attackRange: 5
+  attackRange: 8
   damage: 15
+  attackShape: 1
+  applyKnockback: 1
+  knockbackForce: 100
   meleeOffset: 1.2
-  slashVFXPrefab: {fileID: 0}
-  slashVFXLifetime: 0.3
-  projectileData: {fileID: 11400000, guid: a4d28023acae05e49b0a7474363b5ae9, type: 2}
-  projectileCount: 1
-  spreadAngle: 10
+  slashVFXPrefab: {fileID: 6547965365630005983, guid: a5f2e1a561eda814091741bf454dd28c, type: 3}
+  slashVisualScale: {x: 1, y: 1}
+  slashVFXLifetime: 2
+  projectileData: {fileID: 0}
+  projectileCount: 0
+  spreadAngle: 0

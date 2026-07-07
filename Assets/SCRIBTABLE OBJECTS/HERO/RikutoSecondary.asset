@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: RikutoSecondary
   m_EditorClassIdentifier: 
   attackType: 0
-  cooldown: 5
-  attackRange: 5
-  damage: 10
+  cooldown: 10
+  attackRange: 0
+  damage: 0
   attackShape: 1
   applyKnockback: 1
   knockbackForce: 1000
   meleeOffset: 0
-  slashVFXPrefab: {fileID: 6547965365630005983, guid: a5f2e1a561eda814091741bf454dd28c, type: 3}
+  slashVFXPrefab: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
   slashVisualScale: {x: 3, y: 3}
-  slashVFXLifetime: 2
+  slashVFXLifetime: 4
   projectileData: {fileID: 0}
   projectileCount: 1
   spreadAngle: 15

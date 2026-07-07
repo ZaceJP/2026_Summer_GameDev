@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Skeleton_Necromancer_Staff
-  m_Shader: {fileID: -6465566751694194690, guid: 3461ffbf3c614ba9a48f9e3b572e7c88, type: 3}
+  m_Shader: {fileID: 4800000, guid: ff1934f0978715c4eb6ad5202b1f6f33, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -47,6 +47,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BaseColor_2:
         m_Texture: {fileID: 2800000, guid: cb123586b6b74233ac99ef9fee9d2321, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: bd02a56916194cd4a03e1824949c3bc1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -97,6 +101,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 26dcbc6daf8c48c1a2371de338633c54, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OutlineZOffsetMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -139,16 +147,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AdditionalLightIgnoreCelShade: 0.9
     - _AlphaClip: 0.022
     - _Base_Roughness: 0
     - _Blood_Intensity: 0
     - _Blood_Roughness: 0.8
     - _BumpScale: 1
+    - _CelShadeMidPoint: -0.5
+    - _CelShadeSoftness: 0.05
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DirectLightMultiplier: 1
     - _Dirt_Intensity: 0
     - _Dirt_Roughness: 0.2
     - _DstBlend: 0
+    - _EmissionMulByBaseColor: 0
     - _EnableWhiteColor: 0
     - _Enable_B: 0
     - _Enable_G: 0
@@ -157,16 +170,27 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Hide: 0
+    - _IndirectLightMultiplier: 1
     - _InvertTexture: 1
+    - _IsFace: 0
+    - _MainLightIgnoreCelShade: 0
     - _Metallic: 0
     - _Metallic_Intensity: 1
     - _Mode: 0
     - _Normal_Intencity: 1.31
+    - _OcclusionRemapEnd: 1
+    - _OcclusionRemapStart: 0
     - _OcclusionStrength: 1
+    - _OutlineWidth: 4
+    - _OutlineZOffset: 0.0001
+    - _OutlineZOffsetMaskRemapEnd: 1
+    - _OutlineZOffsetMaskRemapStart: 0
     - _Parallax: 0.02
     - _Power: 1.46
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadowMappingAmount: 0.65
+    - _ReceiveShadowMappingPosOffset: 0
     - _Rotate: 0
     - _Rotated: 0
     - _Rotates: 0
@@ -182,6 +206,9 @@ Material:
     - _Uoffset: 0
     - _Uoffsetd: 0
     - _Uoffsets: 0
+    - _UseAlphaClipping: 0
+    - _UseEmission: 0
+    - _UseOcclusion: 0
     - _Utiling: 0
     - _Utilingd: 0
     - _Utilings: 0
@@ -196,17 +223,23 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BloodColor: {r: 0.227451, g: 0, b: 0, a: 1}
     - _Blood_Color: {r: 0.22745097, g: 0, b: 0, a: 1}
     - _ChangeBaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DirtColor: {r: 0.09433961, g: 0.05742973, b: 0.03328586, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
+    - _IndirectLightMinColor: {r: 0.09999997, g: 0.09999997, b: 0.09999997, a: 1}
+    - _OcclusionMapChannelMask: {r: 1, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _Part_B: {r: 1, g: 1, b: 1, a: 0}
     - _Part_G: {r: 1, g: 1, b: 1, a: 0}
     - _Part_R: {r: 1, g: 1, b: 1, a: 0}
     - _Patten_B_Color: {r: 1, g: 1, b: 1, a: 0}
     - _Patten_G_Color: {r: 1, g: 1, b: 1, a: 0}
     - _Patten_R_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _ShadowMapColor: {r: 1, g: 0.825, b: 0.78, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
