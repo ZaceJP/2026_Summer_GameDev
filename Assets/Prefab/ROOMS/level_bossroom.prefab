@@ -6303,7 +6303,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.8, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6642732132499045315}
@@ -6327,6 +6327,10 @@ MonoBehaviour:
   southDoor: {fileID: 6285943158544550848}
   eastDoor: {fileID: 0}
   westDoor: {fileID: 0}
+  northWall: {fileID: 0}
+  southWall: {fileID: 0}
+  eastWall: {fileID: 0}
+  westWall: {fileID: 0}
 --- !u!114 &2297010545296357452
 MonoBehaviour:
   m_ObjectHideFlags: 0

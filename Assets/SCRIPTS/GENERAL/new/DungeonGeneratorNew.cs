@@ -187,6 +187,7 @@ public class DungeonGeneratorNew : MonoBehaviour
 
         ReplaceFurthestRoomWithBossRoom();
         ReplaceDeadEnds();
+        UpdateRoomConnections();
 
     }
 
@@ -297,9 +298,38 @@ public class DungeonGeneratorNew : MonoBehaviour
             }
         }
     }
-    
+
     //###############    Check for Connections for the Dead End  ##############
-    
+
+    void UpdateRoomConnections()
+    {
+        foreach (SpawnedRoom room in spawnedRooms)
+        {
+            RoomDoors doors =
+                room.roomObject.GetComponent<RoomDoors>();
+
+            if (doors == null)
+                continue;
+
+            Vector2Int pos = room.gridPos;
+
+            doors.SetConnection(
+                DoorDirection.North,
+                roomPositions.Contains(pos + Vector2Int.up));
+
+            doors.SetConnection(
+                DoorDirection.South,
+                roomPositions.Contains(pos + Vector2Int.down));
+
+            doors.SetConnection(
+                DoorDirection.East,
+                roomPositions.Contains(pos + Vector2Int.right));
+
+            doors.SetConnection(
+                DoorDirection.West,
+                roomPositions.Contains(pos + Vector2Int.left));
+        }
+    }
     int CountRoomConnections(Vector2Int pos)
     {
         int count = 0;

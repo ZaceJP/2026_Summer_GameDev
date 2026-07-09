@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
-
-    [Header("Hit Reaction")]
+   [Header("Hit Reaction")]
     public float knockbackForce = 6f;
     public float knockbackDuration = 0.12f;
 
@@ -14,16 +13,16 @@ public class EnemyController : MonoBehaviour, IDamageable
     public Transform player;
 
     private float lastAttackTime;
-    private int currentHealth;
-    private CharacterController controller;
-    private RoomEncounter room;
+    protected int currentHealth;
+    protected CharacterController controller;
+    protected RoomEncounter room;
 
-    private Animator animator;
-    private AudioSource audioSource;
+    protected Animator animator;
+    protected AudioSource audioSource;
 
-    private bool isDead;
+    protected bool isDead;
 
-    private void Start()
+    protected virtual void Start()
     {
         room = GetComponentInParent<RoomEncounter>();
         Debug.Log("Enemy room found: " + room);
@@ -209,7 +208,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         );
     }
 
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         DamageNumberManager.Instance.ShowDamage(
           amount,
@@ -237,7 +236,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         knockbackTimer = knockbackDuration;
     }
 
-    void Die()
+    // BOSS CHECK
+    public int CurrentHealth => currentHealth;
+    protected virtual void Die()
     {
         Debug.Log("DIE FUNCTION CALLED");
 
@@ -262,6 +263,10 @@ public class EnemyController : MonoBehaviour, IDamageable
             Debug.Log("ROOM IS NULL");
         }
 
+        if (data.isBoss)
+        {
+            GameEndManager.Instance.TriggerEndScreen(GameEndState.GameClear);
+        }
         isDead = true;
         Destroy(gameObject, 5f);
     }

@@ -17,9 +17,12 @@ public class GameEndManager : MonoBehaviour
     public GameObject endScreenPanel; // The master Canvas/Panel
 
     [Header("Dynamic UI Elements")]
-    public TMP_Text endScreenTitleText;   // Swapped to TMP_Text for TextMeshPro
-    public string gameOverMessage = "GAME OVER";
-    public string gameClearMessage = "STAGE CLEAR!";
+    public Image endScreenImage;
+
+    [Header("End Screen Images")]
+    public Sprite gameOverSprite;
+    public Sprite gameClearSprite;
+
 
     [Header("Buttons")]
     public Button actionButton;       // Dual-purpose: "Restart" on loss, "Next Level" on win
@@ -58,7 +61,8 @@ public class GameEndManager : MonoBehaviour
         // Configure the UI based on Win vs. Loss
         if (state == GameEndState.GameOver)
         {
-            if (endScreenTitleText != null) endScreenTitleText.text = gameOverMessage;
+            if (endScreenImage != null)
+                endScreenImage.sprite = gameOverSprite;
 
             // Set action button to restart the current level
             if (actionButton != null)
@@ -74,7 +78,8 @@ public class GameEndManager : MonoBehaviour
         }
         else if (state == GameEndState.GameClear)
         {
-            if (endScreenTitleText != null) endScreenTitleText.text = gameClearMessage;
+            if (endScreenImage != null)
+                endScreenImage.sprite = gameClearSprite;
 
             // Set action button to progress
             if (actionButton != null)

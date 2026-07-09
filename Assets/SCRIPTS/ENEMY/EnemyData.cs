@@ -8,6 +8,9 @@ public class EnemyData : ScriptableObject
     public float viewDistance = 10f;
     public int maxHealth = 10;
 
+    [Header("Is this the Boss?")]
+    public bool isBoss = false;
+
     [Header("Attack")]
     public AttackData attackData;   // all attack info lives here now
 
