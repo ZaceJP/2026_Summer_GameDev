@@ -12,6 +12,13 @@ public class HeroSelectManager : MonoBehaviour
     [SerializeField] private TMP_Text heroNameText;
     [SerializeField] private TMP_Text heroDescriptionText;
 
+    [Header("Heroes")]
+    [SerializeField] private HeroSelectCharacter[] heroes;
+
+    private int currentIndex = 0;
+    private float inputCooldown = 0.2f;
+    private float inputTimer;
+
     [SerializeField]
     private float selectionCooldown = 2.5f;
 
@@ -20,13 +27,27 @@ public class HeroSelectManager : MonoBehaviour
     private bool canSelect = true;
 
 
+    private void Start()
+    {
+        if (heroes.Length == 0)
+            return;
+
+        currentIndex = 0;
+
+        canSelect = true;
+
+        SelectCharacter(heroes[currentIndex]);
+    }
+
     public void SelectCharacter(HeroSelectCharacter hero)
     {
         if (!canSelect)
             return;
 
         if (currentSelection == hero)
-            return;
+            currentIndex = System.Array.IndexOf(heroes, hero);
+
+        currentIndex = System.Array.IndexOf(heroes, hero);
 
         canSelect = false;
 
@@ -43,6 +64,49 @@ public class HeroSelectManager : MonoBehaviour
         StartCoroutine(SelectionCooldown());
     }
 
+    private void Update()
+    {
+        inputTimer -= Time.deltaTime;
+
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (inputTimer <= 0f)
+        {
+            if (horizontal > 0.5f)
+            {
+                NextHero();
+            }
+            else if (horizontal < -0.5f)
+            {
+                PreviousHero();
+            }
+        }
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            StartGame();
+        }
+    }
+
+    void NextHero()
+    {
+        if (heroes.Length == 0)
+            return;
+
+        int next = (currentIndex + 1) % heroes.Length;
+
+        SelectCharacter(heroes[next]);
+    }
+
+    void PreviousHero()
+    {
+        if (heroes.Length == 0)
+            return;
+
+        int previous = (currentIndex - 1 + heroes.Length) % heroes.Length;
+
+        SelectCharacter(heroes[previous]);
+    }
     private IEnumerator SelectionCooldown()
     {
         yield return new WaitForSeconds(selectionCooldown);

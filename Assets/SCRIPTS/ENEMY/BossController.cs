@@ -19,15 +19,28 @@ public class BossController : EnemyController
     [SerializeField] private GameObject phase1Model;
     [SerializeField] private GameObject phase2Model;
 
+    [Header("ATTACKS")]
+    [SerializeField]
+    private BossAttack[] phase1Attacks;
+
+    [SerializeField]
+    private BossAttack[] phase2Attacks;
+
     [Header("Transformation")]
     [SerializeField] private float transformDuration = 3f;
     [SerializeField] private GameObject transformVFX;
 
+    [Header("Combat")]
+    [SerializeField] private float attackInterval = 3f;
+
     private BossState currentState = BossState.Phase1;
+
+    private float attackTimer;
 
     protected override void Start()
     {
-      //  data = phase1Data;
+        // Uncomment once Phase 1 and Phase 2 use different EnemyData
+        // data = phase1Data;
 
         if (phase1Model != null)
             phase1Model.SetActive(true);
@@ -35,8 +48,55 @@ public class BossController : EnemyController
         if (phase2Model != null)
             phase2Model.SetActive(false);
 
+        attackTimer = attackInterval;
+
         base.Start();
     }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (isDead)
+            return;
+
+        if (currentState == BossState.Transforming)
+            return;
+
+        if (player == null)
+            return;
+
+        // Don't do anything until the player is close enough
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance > data.viewDistance)
+            return;
+
+        attackTimer -= Time.deltaTime;
+
+        if (attackTimer <= 0f)
+        {
+            UseRandomAttack();
+            attackTimer = attackInterval;
+        }
+    }
+
+   public void UseRandomAttack()
+    {
+        BossAttack[] attacks =
+            currentState == BossState.Phase1
+            ? phase1Attacks
+            : phase2Attacks;
+
+        if (attacks.Length == 0)
+            return;
+
+        BossAttack attack =
+            attacks[Random.Range(0, attacks.Length)];
+
+        attack.Execute(this);
+    }
+    
 
     public override void TakeDamage(int amount)
     {
@@ -48,8 +108,7 @@ public class BossController : EnemyController
 
         if (currentState == BossState.Phase1)
         {
-            float hpPercent =
-                (float)CurrentHealth / data.maxHealth;
+            float hpPercent = (float)CurrentHealth / data.maxHealth;
 
             if (hpPercent <= 0.5f)
             {
@@ -76,17 +135,32 @@ public class BossController : EnemyController
         if (phase2Model != null)
             phase2Model.SetActive(true);
 
-        data = phase2Data;
-
-        currentHealth = data.maxHealth;
+        if (phase2Data != null)
+        {
+            data = phase2Data;
+            currentHealth = data.maxHealth;
+        }
 
         currentState = BossState.Phase2;
     }
 
     protected override void Die()
     {
+        currentState = BossState.Dead;
+
         GameEndManager.Instance.TriggerEndScreen(GameEndState.GameClear);
 
         base.Die();
+    }
+
+    public void PlayAnimation(BossAnimation animation)
+    {
+        if (animator == null)
+            return;
+
+        if (animation == BossAnimation.None)
+            return;
+
+        animator.SetTrigger(animation.ToString());
     }
 }

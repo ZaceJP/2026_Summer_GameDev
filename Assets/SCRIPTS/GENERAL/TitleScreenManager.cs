@@ -38,6 +38,9 @@ public class TitleScreenManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("TITLE SCREEN START");
+
+
         Time.timeScale = 1f;
 
         playButton.onClick.AddListener(OnPlayPressed);

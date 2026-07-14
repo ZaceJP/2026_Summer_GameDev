@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b036ebab1fbdfb4ab88a4e49ae8ba17, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  attackType: 0
+  cooldown: 0.5
+  attackRange: 0
+  damage: 0
+  attackShape: 0
+  skillEffect: 1
+  healAmount: 30
+  shieldAmount: 0
+  shieldDuration: 0
+  effectRadius: 0
+  applyKnockback: 0
+  knockbackForce: 3
+  meleeOffset: 0
+  skillVFXPrefab: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+  skillVisualScale: {x: 1, y: 1}
+  skillVFXLifetime: 2
+  projectileData: {fileID: 0}
+  projectileCount: 1
+  spreadAngle: 15

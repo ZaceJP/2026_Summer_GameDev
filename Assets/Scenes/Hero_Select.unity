@@ -930,6 +930,10 @@ MonoBehaviour:
   heroSelection: {fileID: 11400000, guid: b6a544c6bd28fe7489b212941dceddbe, type: 2}
   heroNameText: {fileID: 1945833042}
   heroDescriptionText: {fileID: 1556463367}
+  heroes:
+  - {fileID: 681403260}
+  - {fileID: 1182102519}
+  - {fileID: 238421171}
   selectionCooldown: 2.1
 --- !u!4 &190450092
 Transform:

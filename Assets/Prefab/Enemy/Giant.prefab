@@ -331,7 +331,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: ca3bc2b6762e77f48af45adde2355810, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 6f62635e712df2e42bb0e7d7ba3310b9, type: 2}
+      objectReference: {fileID: 9100000, guid: faa585cd7f0cf794b994797cbd861f58, type: 2}
     - target: {fileID: 5900336400078107880, guid: ca3bc2b6762e77f48af45adde2355810, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -405,6 +405,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca3bc2b6762e77f48af45adde2355810, type: 3}
       insertIndex: -1
       addedObject: {fileID: 699364912283223436}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca3bc2b6762e77f48af45adde2355810, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3749417142175464603}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca3bc2b6762e77f48af45adde2355810, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5530849388434472463}
   m_SourcePrefab: {fileID: 100100000, guid: ca3bc2b6762e77f48af45adde2355810, type: 3}
 --- !u!1 &5364130772737217490 stripped
 GameObject:
@@ -431,8 +437,13 @@ MonoBehaviour:
   phase2Data: {fileID: 0}
   phase1Model: {fileID: 0}
   phase2Model: {fileID: 0}
+  phase1Attacks:
+  - {fileID: 3749417142175464603}
+  - {fileID: 5530849388434472463}
+  phase2Attacks: []
   transformDuration: 3
   transformVFX: {fileID: 0}
+  attackInterval: 3
 --- !u!143 &1926556216274718591
 CharacterController:
   m_ObjectHideFlags: 0
@@ -479,3 +490,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.7553236, z: 1}
   m_Center: {x: 0, y: 0.86575437, z: 0}
+--- !u!114 &3749417142175464603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364130772737217490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb6d534e3fb7cc4793284cd812724e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: Smash
+  cooldown: 5
+  radius: 3
+  warningTime: 2
+  damage: 40
+--- !u!114 &5530849388434472463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364130772737217490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08f0e045dcbadf45be78a3da3437fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: ConeSMash
+  cooldown: 7
+  range: 6
+  angle: 70
+  warningTime: 1.5
+  damage: 30

@@ -5,6 +5,21 @@ public enum AttackType { Melee, Projectile }
 
 public enum AttackShape {Box,Circle}
 
+public enum SkillEffect
+{
+    None,
+
+    Heal,
+    ShadowExplosion,
+    ShadowBarrier,
+
+    EarthStomp,
+    Rage,
+
+    FrostNova,
+    MeteorRain
+}
+
 
 [CreateAssetMenu(fileName = "NewAttack", menuName = "Combat/Attack Data")]
 public class AttackData : ScriptableObject
@@ -17,6 +32,19 @@ public class AttackData : ScriptableObject
     public int damage = 10;    // base damage — player overrides with PlayerStats
     public AttackShape attackShape = AttackShape.Box;
 
+    [Header("Special Skill")]
+
+    public SkillEffect skillEffect = SkillEffect.None;
+
+    public int healAmount = 30;
+
+    public int shieldAmount = 100;
+
+    public float shieldDuration = 5f;
+
+    public float effectRadius = 4f;
+
+
     [Header("Knockback")]
     public bool applyKnockback = false;
     public float knockbackForce = 3f;
@@ -24,9 +52,9 @@ public class AttackData : ScriptableObject
 
     [Header("Melee Only")]
     public float meleeOffset = 0.2f;
-    public GameObject slashVFXPrefab;
-    public Vector2 slashVisualScale = Vector2.one;
-    public float slashVFXLifetime = 0.3f;
+    public GameObject skillVFXPrefab;
+    public Vector2 skillVisualScale = Vector2.one;
+    public float skillVFXLifetime = 0.3f;
 
 
     [Header("Projectile Only")]

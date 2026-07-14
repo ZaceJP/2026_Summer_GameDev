@@ -64,9 +64,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2034246223965424961, guid: 3484544f223f3a14e8b841ab69538ba6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3484544f223f3a14e8b841ab69538ba6, type: 3}
       propertyPath: m_Name
       value: Spike_Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509450121366622026, guid: 3484544f223f3a14e8b841ab69538ba6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9013638940889411661, guid: 3484544f223f3a14e8b841ab69538ba6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

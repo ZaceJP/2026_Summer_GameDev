@@ -109,18 +109,16 @@ public class PlayerHUD : MonoBehaviour
     void FindPlayer()
     {
         GameObject player =
-            GameObject.FindGameObjectWithTag("Player");
+       GameObject.FindGameObjectWithTag("Player");
 
-        playerAttack =
-         player.GetComponent<PlayerAttack>();
+        if (player == null)
+            return;
 
-        if (player != null)
-        {
-            playerStats =
-                player.GetComponent<PlayerStats>();
+        playerAttack = player.GetComponent<PlayerAttack>();
+        playerStats = player.GetComponent<PlayerStats>();
 
-            SetupHeroUI();
-        }
+        SetupHeroUI();
+        UpdateInputPrompts();
     }
 
     // ─────────────────────────────
@@ -236,6 +234,7 @@ public class PlayerHUD : MonoBehaviour
 
     void UpdateInputPrompts()
     {
+        Debug.Log("Updating input prompts");
         if (usingController)
         {
             if (primaryInputImage != null)

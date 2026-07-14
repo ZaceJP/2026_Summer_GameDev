@@ -14,6 +14,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public float attackSpeed;
     public float attackRange;
 
+    [Header("Shield")]
+    public int shieldAmount;
+    public bool HasShield => shieldAmount > 0;
+
     [Header("Multipliers — modified by upgrades")]
     public float damageMultiplier = 1f;
     public float speedMultiplier = 1f;
@@ -49,6 +53,19 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount)
     {
+        if (shieldAmount > 0)
+        {
+            int absorbed = Mathf.Min(amount, shieldAmount);
+
+            shieldAmount -= absorbed;
+            amount -= absorbed;
+
+            // Optional: play shield hit VFX/SFX
+
+            if (amount <= 0)
+                return;
+        }
+
         if (DamageNumberManager.Instance != null)
         {
             DamageNumberManager.Instance.ShowDamage(
@@ -72,6 +89,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
             Die();
     }
 
+    public void AddShield(int amount)
+    {
+        shieldAmount += amount;
+
+        Debug.Log("Shield: " + shieldAmount);
+    }
     public void Heal(int amount)
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);

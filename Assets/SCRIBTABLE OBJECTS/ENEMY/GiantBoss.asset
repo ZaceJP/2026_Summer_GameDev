@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bbb199cca8d7b499cf2fc6610c25f3, type: 3}
   m_Name: GiantBoss
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   viewDistance: 10
-  maxHealth: 50
+  maxHealth: 100
   isBoss: 1
   attackData: {fileID: 0}
   modelPrefab: {fileID: 1570509298993749243, guid: 255e3f84726a418408c5bbcc0ef3e7ac, type: 3}

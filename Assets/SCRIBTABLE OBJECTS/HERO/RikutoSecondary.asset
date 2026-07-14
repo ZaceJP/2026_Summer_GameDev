@@ -17,12 +17,17 @@ MonoBehaviour:
   attackRange: 0
   damage: 0
   attackShape: 1
-  applyKnockback: 1
-  knockbackForce: 1000
+  skillEffect: 1
+  healAmount: 30
+  shieldAmount: 0
+  shieldDuration: 0
+  effectRadius: 0
+  applyKnockback: 0
+  knockbackForce: 0
   meleeOffset: 0
-  slashVFXPrefab: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
-  slashVisualScale: {x: 3, y: 3}
-  slashVFXLifetime: 4
+  skillVFXPrefab: {fileID: 0}
+  skillVisualScale: {x: 1, y: 1}
+  skillVFXLifetime: 0.3
   projectileData: {fileID: 0}
   projectileCount: 1
   spreadAngle: 15

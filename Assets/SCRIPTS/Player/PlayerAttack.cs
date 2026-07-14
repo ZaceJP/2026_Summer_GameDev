@@ -73,6 +73,8 @@ public class PlayerAttack : MonoBehaviour
     // Called by Q Key / Controller North (Triangle/Y)
     public void OnSpecial1()
     {
+        Debug.Log("Q pressed");
+
         if (heroDef == null || heroDef.specialSkill1 == null) return;
         anim.PlaySkill1();
         PerformAttack(heroDef.specialSkill1, heroDef.specialSkill1SFX);
@@ -81,6 +83,8 @@ public class PlayerAttack : MonoBehaviour
     // Called by E Key / Controller East (Circle/B)
     public void OnSpecial2()
     {
+        Debug.Log("E pressed");
+
         if (heroDef == null || heroDef.specialSkill2 == null) return;
         anim.PlaySkill2();
         PerformAttack(heroDef.specialSkill2, heroDef.specialSkill2SFX);
@@ -89,15 +93,28 @@ public class PlayerAttack : MonoBehaviour
 
     private void PerformAttack(AttackData data, AudioClip sfxClip)
     {
+        Debug.Log("Skill Effect: " + data.skillEffect);
         if (!IsAttackReady(data))
             return;
 
         PutAttackOnCooldown(data);
 
-        // Play attack sound
         if (audioSource != null && sfxClip != null)
-        {
             audioSource.PlayOneShot(sfxClip);
+
+        switch (data.skillEffect)
+        {
+            case SkillEffect.Heal:
+                PerformHeal(data);
+                return;
+
+            case SkillEffect.ShadowExplosion:
+                PerformShadowExplosion(data);
+                return;
+
+            case SkillEffect.ShadowBarrier:
+                PerformBarrier(data);
+                return;
         }
 
         if (data.attackType == AttackType.Melee)
@@ -123,7 +140,7 @@ public class PlayerAttack : MonoBehaviour
         // VFX
         // ==========================
 
-        if (data.slashVFXPrefab != null)
+        if (data.skillVFXPrefab != null)
         {
             Vector3 visualPos;
 
@@ -140,12 +157,12 @@ public class PlayerAttack : MonoBehaviour
 
             GameObject slash =
                 Instantiate(
-                    data.slashVFXPrefab,
+                    data.skillVFXPrefab,
                     visualPos,
                     Quaternion.LookRotation(aimDirection)
                 );
 
-            Destroy(slash, data.slashVFXLifetime);
+            Destroy(slash, data.skillVFXLifetime);
         }
 
         // ==========================
@@ -196,7 +213,7 @@ public class PlayerAttack : MonoBehaviour
                 continue;
 
             EnemyController enemy =
-                hit.GetComponent<EnemyController>();
+                hit.GetComponentInParent<EnemyController>();
             Debug.Log("Enemy Found: " + enemy);
 
             if (enemy == null)
@@ -248,6 +265,95 @@ public class PlayerAttack : MonoBehaviour
             float angle = startAngle + data.spreadAngle * i;
             Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * aimDirection;
             SpawnProjectile(data, dir, "Enemy", damage);
+        }
+    }
+
+    void PerformHeal(AttackData data)
+    {
+        // Heal
+        stats.Heal(data.healAmount);
+
+        // Spawn VFX
+        if (data.skillVFXPrefab != null)
+        {
+            GameObject vfx = Instantiate(
+                data.skillVFXPrefab,
+                transform.position,
+                Quaternion.identity);
+
+            Destroy(vfx, data.skillVFXLifetime);
+        }
+    }
+
+    void PerformShadowExplosion(AttackData data)
+    {
+        // VFX
+        if (data.skillVFXPrefab != null)
+        {
+            GameObject vfx = Instantiate(
+                data.skillVFXPrefab,
+                transform.position,
+                Quaternion.identity);
+
+            Destroy(vfx, data.skillVFXLifetime);
+        }
+
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            data.effectRadius);
+
+        Debug.Log("Shadow Explosion hits: " + hits.Length);
+
+        Debug.DrawLine(transform.position,
+               transform.position + Vector3.up * data.effectRadius,
+               Color.magenta,
+               2f);
+
+        foreach (Collider hit in hits)
+        {
+            if (!hit.CompareTag("Enemy"))
+                continue;
+
+            EnemyController enemy =
+                hit.GetComponentInParent<EnemyController>();
+
+            if (enemy == null)
+                continue;
+
+            enemy.TakeDamage((int)stats.GetDamage());
+
+            if (data.applyKnockback)
+            {
+                Vector3 dir =
+                    enemy.transform.position - transform.position;
+
+                dir.y = 0;
+                dir.Normalize();
+
+                Debug.Log("Knockback!");
+                enemy.ApplyKnockback(
+                    dir,
+                    data.knockbackForce);
+            }
+        }
+    }
+
+    void PerformBarrier(AttackData data)
+    {
+        Debug.Log("Barrier Activated");
+
+        stats.AddShield(data.shieldAmount);
+
+        if (data.skillVFXPrefab != null)
+        {
+            GameObject vfx = Instantiate(
+                data.skillVFXPrefab,
+                transform.position,
+                Quaternion.identity,
+                transform   // <-- parent it to player
+            );
+
+            Destroy(vfx, data.skillVFXLifetime);
         }
     }
 

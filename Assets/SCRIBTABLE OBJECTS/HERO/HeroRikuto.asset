@@ -26,9 +26,9 @@ MonoBehaviour:
   baseDamage: 10
   attackRange: 2
   primaryAttack: {fileID: 11400000, guid: b0f279be13c19304f8725140f5cf4108, type: 2}
-  secondaryAttack: {fileID: 11400000, guid: e7dae63425a5f7147b31460036cc88d8, type: 2}
-  specialSkill1: {fileID: 0}
-  specialSkill2: {fileID: 0}
+  secondaryAttack: {fileID: 11400000, guid: eb88c849454b86641b89ea3126b70766, type: 2}
+  specialSkill1: {fileID: 11400000, guid: d3e08ef4ec95d4443ae72eeb5faf39b8, type: 2}
+  specialSkill2: {fileID: 11400000, guid: 9a8167c46b1356f438a47683e60c9e5b, type: 2}
   primaryAttackIcon: {fileID: -863316558, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
   secondaryAttackIcon: {fileID: 925540883, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}
   skill1Icon: {fileID: 1498897554, guid: 81414a3c5634cab4196ec5a7ff931c12, type: 3}

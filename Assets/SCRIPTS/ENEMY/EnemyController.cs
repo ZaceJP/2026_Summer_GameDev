@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (isDead)
             return;
@@ -124,7 +124,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         float range = data.attackData.attackRange;
 
         // Spawn slash effect
-        if (data.attackData.slashVFXPrefab != null)
+        if (data.attackData.skillVFXPrefab != null)
         {
             Vector3 vfxPos =
                 transform.position +
@@ -132,12 +132,12 @@ public class EnemyController : MonoBehaviour, IDamageable
 
             GameObject slash =
                 Instantiate(
-                    data.attackData.slashVFXPrefab,
+                    data.attackData.skillVFXPrefab,
                     vfxPos,
                     Quaternion.LookRotation(transform.forward)
                 );
 
-            Destroy(slash, data.attackData.slashVFXLifetime);
+            Destroy(slash, data.attackData.skillVFXLifetime);
         }
 
         // Existing hit detection
@@ -270,4 +270,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         isDead = true;
         Destroy(gameObject, 5f);
     }
+
+  
 }
