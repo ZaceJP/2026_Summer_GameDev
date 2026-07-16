@@ -1,14 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
     [Header("References")]
     [HideInInspector] public HeroDefinition heroDef; // Set by PlayerInitializer
 
+    [SerializeField] private LayerMask groundMask;
+
     private Vector2 moveInput;
     private Vector3 aimDirection;
+    private Vector3 aimTarget;
+    private bool usingControllerAim;
+    private Vector2 lookInput;
     private Dictionary<AttackData, float> attackCooldowns = new Dictionary<AttackData, float>();
     // private float lastAttackTime;
 
@@ -26,6 +32,11 @@ public class PlayerAttack : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+    }
+
+    public void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
     }
 
     private bool IsAttackReady(AttackData attack)
@@ -102,6 +113,8 @@ public class PlayerAttack : MonoBehaviour
         if (audioSource != null && sfxClip != null)
             audioSource.PlayOneShot(sfxClip);
 
+        Debug.Log(data.skillEffect);
+
         switch (data.skillEffect)
         {
             case SkillEffect.Heal:
@@ -114,6 +127,13 @@ public class PlayerAttack : MonoBehaviour
 
             case SkillEffect.ShadowBarrier:
                 PerformBarrier(data);
+                return;
+
+            case SkillEffect.FrostNova:
+                PerformFrostNova(data);
+                return;
+            case SkillEffect.MeteorRain:
+                StartCoroutine(PerformMeteorRain(data));
                 return;
         }
 
@@ -320,7 +340,7 @@ public class PlayerAttack : MonoBehaviour
             if (enemy == null)
                 continue;
 
-            enemy.TakeDamage((int)stats.GetDamage());
+            enemy.TakeDamage(data.damage);
 
             if (data.applyKnockback)
             {
@@ -335,6 +355,159 @@ public class PlayerAttack : MonoBehaviour
                     dir,
                     data.knockbackForce);
             }
+        }
+    }
+
+    void PerformFrostNova(AttackData data)
+    {
+        // Spawn VFX
+        if (data.skillVFXPrefab != null)
+        {
+            GameObject vfx = Instantiate(
+                data.skillVFXPrefab,
+                transform.position,
+                Quaternion.identity);
+
+            Destroy(vfx, data.skillVFXLifetime);
+        }
+
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            data.effectRadius);
+
+        foreach (Collider hit in hits)
+        {
+            if (!hit.CompareTag("Enemy"))
+                continue;
+
+            EnemyController enemy =
+                hit.GetComponent<EnemyController>();
+
+            if (enemy == null)
+                continue;
+
+            enemy.TakeDamage(data.damage);
+
+            enemy.Freeze(data.freezeDuration,data.statusEffectVFX);
+
+            if (data.applyKnockback)
+            {
+                Vector3 dir =
+                    enemy.transform.position -
+                    transform.position;
+
+                dir.y = 0;
+                dir.Normalize();
+
+                enemy.ApplyKnockback(
+                    dir,
+                    data.knockbackForce);
+            }
+        }
+    }
+
+    IEnumerator PerformMeteorRain(AttackData data)
+    {
+        Vector3 target = GetSkillTargetPosition(data);
+
+        // 1. Spawn targeting indicator
+        GameObject indicator = null;
+
+        if (data.targetIndicatorPrefab != null)
+        {
+            indicator = Instantiate(
+                data.targetIndicatorPrefab,
+                target,
+                Quaternion.identity);
+
+            Destroy(indicator, data.castDelay);
+        }
+
+        // 2. Wait before impact
+        yield return new WaitForSeconds(data.castDelay);
+
+        for (int i = 0; i < data.meteorCount; i++)
+        {
+            Vector2 offset =
+                Random.insideUnitCircle * data.meteorSpread;
+
+            Vector3 impactPos =
+                target +
+                new Vector3(offset.x, 0, offset.y);
+
+            SpawnMeteor(data, impactPos);
+
+            yield return new WaitForSeconds(data.meteorSpawnInterval);
+        }
+
+
+    }
+
+    void SpawnMeteor(AttackData data, Vector3 impactPos)
+    {
+        // Find the ground beneath the impact position
+        Vector3 spawnPos = impactPos;
+
+        RaycastHit groundHit;
+
+        if (Physics.Raycast(
+      impactPos + Vector3.up * 10f,
+      Vector3.down,
+      out groundHit,
+      20f,
+      groundMask))
+        {
+            spawnPos = groundHit.point;
+        }
+        else
+        {
+            Debug.Log("Raycast hit nothing!");
+        }
+
+        // Spawn meteor VFX
+        if (data.skillVFXPrefab != null)
+        {
+            GameObject meteor =
+                Instantiate(
+                    data.skillVFXPrefab,
+                    spawnPos,
+                    Quaternion.identity);
+
+            Destroy(meteor, data.skillVFXLifetime);
+        }
+
+        // Damage enemies
+        Collider[] hits =
+            Physics.OverlapSphere(
+                impactPos,
+                data.effectRadius);
+
+        foreach (Collider hit in hits)
+        {
+            if (!hit.CompareTag("Enemy"))
+                continue;
+
+            EnemyController enemy =
+                hit.GetComponentInParent<EnemyController>();
+
+            if (enemy == null)
+                continue;
+
+            enemy.TakeDamage(data.damage);
+
+            if (data.applyKnockback)
+            {
+                Vector3 dir =
+                    enemy.transform.position - impactPos;
+
+                dir.y = 0;
+                dir.Normalize();
+
+                enemy.ApplyKnockback(
+                    dir,
+                    data.knockbackForce);
+            }
+
         }
     }
 
@@ -370,31 +543,69 @@ public class PlayerAttack : MonoBehaviour
 
     // ########## UTILS ##########
 
-    void HandleAiming()
+    Vector3 GetSkillTargetPosition(AttackData data)
     {
-        Vector3 mousePos = GetMouseWorldPosition();
-        Vector3 mouseDir = mousePos - transform.position;
-        mouseDir.y = 0;
-
-        if (mouseDir.sqrMagnitude > 0.01f)
-            aimDirection = mouseDir.normalized;
-        else
+        switch (data.targetType)
         {
-            Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y);
-            if (moveDir.sqrMagnitude > 0.01f)
-                aimDirection = moveDir.normalized;
-        }
+            case TargetType.Self:
+                return transform.position;
 
-        if (aimDirection != Vector3.zero)
-            transform.forward = aimDirection;
+            case TargetType.Direction:
+
+                if (usingControllerAim)
+                {
+                    return transform.position +
+                           aimDirection * data.targetDistance;
+                }
+
+                return aimTarget;
+
+            default:
+                return transform.position;
+        }
     }
 
     Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             return hit.point;
+
         return transform.position;
+    }
+    void HandleAiming()
+    {
+        if (lookInput.sqrMagnitude > 0.1f)
+        {
+            usingControllerAim = true;
+
+            aimDirection = new Vector3(
+                lookInput.x,
+                0,
+                lookInput.y).normalized;
+
+            aimTarget =
+                transform.position +
+                aimDirection * 8f;
+        }
+        else
+        {
+            usingControllerAim = false;
+
+            Vector3 mousePos = GetMouseWorldPosition();
+            Vector3 mouseDir = mousePos - transform.position;
+            mouseDir.y = 0;
+
+            if (mouseDir.sqrMagnitude > 0.01f)
+            {
+                aimDirection = mouseDir.normalized;
+                aimTarget = mousePos;
+            }
+        }
+
+        if (aimDirection != Vector3.zero)
+            transform.forward = aimDirection;
     }
 
     public float GetCooldownRemaining(AttackData attack)
@@ -412,6 +623,7 @@ public class PlayerAttack : MonoBehaviour
         return Mathf.Max(0f, remaining);
     }
 
+    
     public float GetCooldownPercent(AttackData attack)
     {
         if (attack == null)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
@@ -20,16 +21,40 @@ public class EnemyController : MonoBehaviour, IDamageable
     protected Animator animator;
     protected AudioSource audioSource;
 
+    private bool isFrozen;
+    private Coroutine freezeRoutine;
+    private Renderer[] renderers;
+    private Color[][] originalColors;
+
+    private GameObject activeStatusVFX;  // to atatch like freezing vfx or burning , poisona nd so on
+
     protected bool isDead;
 
     protected virtual void Start()
     {
+        
         room = GetComponentInParent<RoomEncounter>();
         Debug.Log("Enemy room found: " + room);
         controller = GetComponent<CharacterController>();
         currentHealth = data.maxHealth;
 
         animator = GetComponentInChildren<Animator>();
+
+        renderers = GetComponentsInChildren<Renderer>();
+
+        originalColors = new Color[renderers.Length][];
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            Material[] mats = renderers[i].materials;
+            originalColors[i] = new Color[mats.Length];
+
+            for (int j = 0; j < mats.Length; j++)
+            {
+                if (mats[j].HasProperty("_Color"))
+                    originalColors[i][j] = mats[j].color;
+            }
+        }
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -61,6 +86,9 @@ public class EnemyController : MonoBehaviour, IDamageable
             knockbackTimer -= Time.deltaTime;
             return;
         }
+
+        if (isFrozen)
+            return;
 
         float distance = Vector3.Distance(transform.position, player.position);
         float attackRange = data.attackData != null ? data.attackData.attackRange : 2f;
@@ -236,6 +264,53 @@ public class EnemyController : MonoBehaviour, IDamageable
         knockbackTimer = knockbackDuration;
     }
 
+    public void Freeze(float duration, GameObject statusVFX)
+    {
+        if (freezeRoutine != null)
+            StopCoroutine(freezeRoutine);
+
+        freezeRoutine = StartCoroutine(
+            FreezeRoutine(duration, statusVFX)
+        );
+    }
+
+    IEnumerator FreezeRoutine(float duration, GameObject statusVFX)
+    {
+        isFrozen = true;
+
+        if (animator != null)
+            animator.speed = 0f;
+
+        AttachStatusVFX(statusVFX);
+        foreach (Renderer r in renderers)
+        {
+            foreach (Material mat in r.materials)
+            {
+                if (mat.HasProperty("_Color"))
+                    mat.color = new Color(0.45f, 0.8f, 1f);
+            }
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        
+        if (animator != null)
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                Material[] mats = renderers[i].materials;
+
+                for (int j = 0; j < mats.Length; j++)
+                {
+                    if (mats[j].HasProperty("_Color"))
+                        mats[j].color = originalColors[i][j];
+                }
+            }
+        RemoveStatusVFX();
+        animator.speed = 1f;
+
+        isFrozen = false;
+    }
+
     // BOSS CHECK
     public int CurrentHealth => currentHealth;
     protected virtual void Die()
@@ -271,5 +346,33 @@ public class EnemyController : MonoBehaviour, IDamageable
         Destroy(gameObject, 5f);
     }
 
-  
+
+    //// HELPER FOT STATUS VFX
+    ///
+    public void AttachStatusVFX(GameObject prefab)
+    {
+        Debug.Log("AttachStatusVFX");
+        if (prefab == null)
+        {
+            Debug.Log("STATUS VFX PREFAB IS NULL");
+            return;
+        }
+
+        Debug.Log("Instantiating " + prefab.name);
+        RemoveStatusVFX();
+
+        activeStatusVFX = Instantiate(prefab, transform);
+        activeStatusVFX.transform.localPosition = Vector3.zero;
+    }
+
+    public void RemoveStatusVFX()
+    {
+        if (activeStatusVFX != null)
+        {
+            Destroy(activeStatusVFX);
+            activeStatusVFX = null;
+        }
+    }
+
+
 }

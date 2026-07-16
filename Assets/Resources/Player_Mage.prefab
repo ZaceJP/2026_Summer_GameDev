@@ -246,6 +246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroDef: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5982202555859472674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +268,7 @@ MonoBehaviour:
   baseDamage: 5
   attackSpeed: 5
   attackRange: 3
+  shieldAmount: 0
   damageMultiplier: 1
   speedMultiplier: 1
   attackSpeedMultiplier: 1
