@@ -13,16 +13,31 @@ MonoBehaviour:
   m_Name: WarriorPrimary
   m_EditorClassIdentifier: 
   attackType: 0
+  attackShape: 0
   cooldown: 0.5
   attackRange: 2
-  damage: 10
-  attackShape: 0
+  damage: 8
+  skillEffect: 0
+  targetType: 0
+  targetDistance: 6
+  castDelay: 0.75
+  targetIndicatorPrefab: {fileID: 0}
+  statusEffectVFX: {fileID: 0}
+  healAmount: 30
+  shieldAmount: 100
+  shieldDuration: 5
+  effectRadius: 4
+  freezeDuration: 3
   applyKnockback: 1
   knockbackForce: 40
+  meteorCount: 8
+  meteorSpread: 3
+  meteorSpawnHeight: 15
+  meteorSpawnInterval: 0.15
   meleeOffset: 1.2
-  slashVFXPrefab: {fileID: 798164934013986568, guid: 9f2aa32a15608894e924a5252adfa723, type: 3}
-  slashVisualScale: {x: 1, y: 1}
-  slashVFXLifetime: 0.3
+  skillVFXPrefab: {fileID: 0}
+  skillVisualScale: {x: 1, y: 1}
+  skillVFXLifetime: 0.3
   projectileData: {fileID: 0}
   projectileCount: 1
   spreadAngle: 15

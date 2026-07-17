@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DreamOrb
   m_EditorClassIdentifier: 
   speed: 6
-  lifetime: 2
+  lifetime: 3
   hitRadius: 1
   piercing: 0
   projectilePrefab: {fileID: 5051701411101734019, guid: 556ea288404fa54429a1b902de3e2ca2, type: 3}

@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: RikutoSecondary
   m_EditorClassIdentifier: 
   attackType: 0
+  attackShape: 1
   cooldown: 10
   attackRange: 0
   damage: 0
-  attackShape: 1
   skillEffect: 1
-  healAmount: 30
+  targetType: 0
+  targetDistance: 6
+  castDelay: 0.75
+  targetIndicatorPrefab: {fileID: 0}
+  statusEffectVFX: {fileID: 0}
+  healAmount: 10
   shieldAmount: 0
   shieldDuration: 0
   effectRadius: 0
+  freezeDuration: 3
   applyKnockback: 0
   knockbackForce: 0
+  meteorCount: 8
+  meteorSpread: 3
+  meteorSpawnHeight: 15
+  meteorSpawnInterval: 0.15
   meleeOffset: 0
   skillVFXPrefab: {fileID: 0}
   skillVisualScale: {x: 1, y: 1}

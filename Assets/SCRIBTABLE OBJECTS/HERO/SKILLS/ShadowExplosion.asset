@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: ShadowExplosion
   m_EditorClassIdentifier: 
   attackType: 0
+  attackShape: 1
   cooldown: 12
   attackRange: 6
-  damage: 20
-  attackShape: 1
+  damage: 10
   skillEffect: 2
+  targetType: 0
+  targetDistance: 6
+  castDelay: 0.75
+  targetIndicatorPrefab: {fileID: 0}
+  statusEffectVFX: {fileID: 0}
   healAmount: 0
   shieldAmount: 0
   shieldDuration: 0
   effectRadius: 10
+  freezeDuration: 3
   applyKnockback: 1
-  knockbackForce: 50
+  knockbackForce: 60
+  meteorCount: 8
+  meteorSpread: 3
+  meteorSpawnHeight: 15
+  meteorSpawnInterval: 0.15
   meleeOffset: 0.2
   skillVFXPrefab: {fileID: 176822597162087251, guid: 46009f57772e5e743bec9df57a49ed66, type: 3}
   skillVisualScale: {x: 1, y: 1}

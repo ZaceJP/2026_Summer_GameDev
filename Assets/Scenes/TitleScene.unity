@@ -18761,6 +18761,7 @@ MonoBehaviour:
   exitButton: {fileID: 1117492283}
   confirmExitButton: {fileID: 653752940}
   cancelExitButton: {fileID: 1962924789}
+  portalTravelSFX: {fileID: 8300000, guid: a263510fe92ae5243aaa2ee56eba2d2e, type: 3}
   optionsBackButton: {fileID: 1799182700}
   mainMenuCam: {fileID: 1254852016}
   optionsMenuCam: {fileID: 481952473}

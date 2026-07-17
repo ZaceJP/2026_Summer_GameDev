@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b036ebab1fbdfb4ab88a4e49ae8ba17, type: 3}
+  m_Name: RockSMash
+  m_EditorClassIdentifier: 
+  attackType: 0
+  attackShape: 1
+  cooldown: 15
+  attackRange: 6
+  damage: 20
+  skillEffect: 2
+  targetType: 0
+  targetDistance: 6
+  castDelay: 0.75
+  targetIndicatorPrefab: {fileID: 0}
+  statusEffectVFX: {fileID: 0}
+  healAmount: 0
+  shieldAmount: 0
+  shieldDuration: 0
+  effectRadius: 10
+  freezeDuration: 3
+  applyKnockback: 1
+  knockbackForce: 100
+  meteorCount: 8
+  meteorSpread: 3
+  meteorSpawnHeight: 15
+  meteorSpawnInterval: 0.15
+  meleeOffset: 0.2
+  skillVFXPrefab: {fileID: 6547965365630005983, guid: a5f2e1a561eda814091741bf454dd28c, type: 3}
+  skillVisualScale: {x: 1, y: 1}
+  skillVFXLifetime: 2
+  projectileData: {fileID: 0}
+  projectileCount: 1
+  spreadAngle: 15

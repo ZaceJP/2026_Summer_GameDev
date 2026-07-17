@@ -13,12 +13,31 @@ MonoBehaviour:
   m_Name: MagePrimary
   m_EditorClassIdentifier: 
   attackType: 1
-  cooldown: 0.5
+  attackShape: 0
+  cooldown: 1
   attackRange: 5
-  damage: 10
+  damage: 5
+  skillEffect: 0
+  targetType: 0
+  targetDistance: 6
+  castDelay: 0.75
+  targetIndicatorPrefab: {fileID: 0}
+  statusEffectVFX: {fileID: 0}
+  healAmount: 30
+  shieldAmount: 100
+  shieldDuration: 5
+  effectRadius: 4
+  freezeDuration: 3
+  applyKnockback: 0
+  knockbackForce: 3
+  meteorCount: 0
+  meteorSpread: 0
+  meteorSpawnHeight: 0
+  meteorSpawnInterval: 0
   meleeOffset: 1.2
-  slashVFXPrefab: {fileID: 0}
-  slashVFXLifetime: 0.3
+  skillVFXPrefab: {fileID: 0}
+  skillVisualScale: {x: 1, y: 1}
+  skillVFXLifetime: 0.3
   projectileData: {fileID: 11400000, guid: a4396394fbf519443b009aeb19a50851, type: 2}
   projectileCount: 1
   spreadAngle: 15

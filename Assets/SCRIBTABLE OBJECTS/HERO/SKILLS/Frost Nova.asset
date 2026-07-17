@@ -13,19 +13,27 @@ MonoBehaviour:
   m_Name: Frost Nova
   m_EditorClassIdentifier: 
   attackType: 0
+  attackShape: 1
   cooldown: 10
   attackRange: 5
-  damage: 2
-  attackShape: 1
-  statusEffectVFX: {fileID: 6126188424833946103, guid: a58aa9a78f2b45b45bb0f3e2e1e3ad3c, type: 3}
+  damage: 5
   skillEffect: 6
+  targetType: 0
+  targetDistance: 6
+  castDelay: 0.75
+  targetIndicatorPrefab: {fileID: 0}
+  statusEffectVFX: {fileID: 6126188424833946103, guid: a58aa9a78f2b45b45bb0f3e2e1e3ad3c, type: 3}
   healAmount: 0
   shieldAmount: 0
   shieldDuration: 0
   effectRadius: 5
-  freezeDuration: 3
+  freezeDuration: 4
   applyKnockback: 1
-  knockbackForce: 10
+  knockbackForce: 30
+  meteorCount: 8
+  meteorSpread: 3
+  meteorSpawnHeight: 15
+  meteorSpawnInterval: 0.15
   meleeOffset: 0
   skillVFXPrefab: {fileID: 176822597162087251, guid: 46009f57772e5e743bec9df57a49ed66, type: 3}
   skillVisualScale: {x: 1, y: 1}

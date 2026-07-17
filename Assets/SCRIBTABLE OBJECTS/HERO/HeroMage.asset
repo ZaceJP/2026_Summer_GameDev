@@ -18,7 +18,7 @@ MonoBehaviour:
   heroClass: 2
   portrait: {fileID: 21300000, guid: a957fbe1add939245a479ab44d39100e, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 09d52760eb7236c42953ae1af0c44d7a, type: 3}
-  maxHealth: 60
+  maxHealth: 30
   moveSpeed: 10
   attackSpeed: 1
   baseDamage: 10
@@ -35,5 +35,5 @@ MonoBehaviour:
   dieSFX: {fileID: 8300000, guid: 01426df89fe52ea4791858f361851aa6, type: 3}
   primaryAttackSFX: {fileID: 8300000, guid: c2b3e571a231c1a49bd9964c4cec8b7c, type: 3}
   secondaryAttackSFX: {fileID: 8300000, guid: f8adbc6a07b4d9545ba2b3fb4a2311d3, type: 3}
-  specialSkill1SFX: {fileID: 8300000, guid: cb64935398b199d49893ace8f4909182, type: 3}
-  specialSkill2SFX: {fileID: 0}
+  specialSkill1SFX: {fileID: 8300000, guid: ee4ee4fc8ac56a0488359d1600da5944, type: 3}
+  specialSkill2SFX: {fileID: 8300000, guid: de239530bc37d46449798a5e5250508a, type: 3}

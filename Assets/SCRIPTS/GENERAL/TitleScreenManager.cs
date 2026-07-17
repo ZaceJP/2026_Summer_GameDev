@@ -20,6 +20,9 @@ public class TitleScreenManager : MonoBehaviour
     public Button confirmExitButton;
     public Button cancelExitButton;
 
+    [Header("Audio")]
+    public AudioClip portalTravelSFX;
+
     [Header("Options Menu Buttons (Add your back button here)")]
     public Button optionsBackButton; // ADDED: Crucial to focus when entering options
 
@@ -82,7 +85,15 @@ public class TitleScreenManager : MonoBehaviour
         mainMenuCam.SetActive(false);
         startGameCam.SetActive(true);
 
-        float delayBeforeFade = Mathf.Max(0, portalFlyThroughTime - levelTransitionScript.transitionTime);
+        yield return new WaitForSeconds(1.2f);
+
+
+        if (MusicManager.Instance != null && portalTravelSFX != null)
+            MusicManager.Instance.PlaySFX(portalTravelSFX);
+
+        float delayBeforeFade =
+            Mathf.Max(0, portalFlyThroughTime - levelTransitionScript.transitionTime);
+
         yield return new WaitForSeconds(delayBeforeFade);
 
         if (levelTransitionScript != null)
