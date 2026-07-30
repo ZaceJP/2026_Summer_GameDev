@@ -215,7 +215,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.8
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -263,7 +263,7 @@ MonoBehaviour:
   heroDef: {fileID: 0}
   maxHealth: 20
   currentHealth: 0
-  moveSpeed: 5
+  moveSpeed: 7
   baseDamage: 5
   attackSpeed: 3
   attackRange: 3

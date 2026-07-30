@@ -12,10 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d49dab58e3aa874e822904faa86642f, type: 3}
   m_Name: DamageUp
   m_EditorClassIdentifier: 
-  upgradeName: Damage Increase
-  description: Increase Damage by 10%
+  upgradeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:a7e1dc9b7b1e370429d3e3cd9dca70e0
+    m_TableEntryReference:
+      m_KeyId: 5680672768
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:a7e1dc9b7b1e370429d3e3cd9dca70e0
+    m_TableEntryReference:
+      m_KeyId: 10780946432
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   icon: {fileID: 21300000, guid: 43bf82c5057728f49af90cd1133735b9, type: 3}
   upgradeType: 0
   rarity: 1
-  value: 10
+  allowedClass: 0
+  value: 25
   isPercentage: 1
+  references:
+    version: 2
+    RefIds: []

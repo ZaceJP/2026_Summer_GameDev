@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems; // ADDED: Required for gamepad control
@@ -28,6 +29,14 @@ public class RewardUI : MonoBehaviour
 
         Time.timeScale = 0f;
 
+        CameraFollow cam = FindFirstObjectByType<CameraFollow>();
+
+        if (cam != null && cam.firstPersonMode)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         GameObject firstActiveCard = null;
 
         for (int i = 0; i < cards.Length; i++)
@@ -40,7 +49,7 @@ public class RewardUI : MonoBehaviour
                 // Track the very first card we set active so we can focus it
                 if (firstActiveCard == null)
                 {
-                    firstActiveCard = cards[i].gameObject;
+                    firstActiveCard = cards[i].button.gameObject;
                 }
             }
             else
@@ -52,8 +61,7 @@ public class RewardUI : MonoBehaviour
         // GAMEPAD FOCUS: Force selection onto the first active reward card!
         if (firstActiveCard != null)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(firstActiveCard);
+            StartCoroutine(SelectFirstCard(firstActiveCard));
         }
     }
 
@@ -66,6 +74,22 @@ public class RewardUI : MonoBehaviour
 
         panel.SetActive(false);
 
+        CameraFollow cam = FindFirstObjectByType<CameraFollow>();
+
+        if (cam != null && cam.firstPersonMode)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         Time.timeScale = 1f;
+    }
+
+    private IEnumerator SelectFirstCard(GameObject button)
+    {
+        yield return null;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(button);
     }
 }

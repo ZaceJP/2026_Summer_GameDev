@@ -12,16 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a656a256f36d84d873c69fc0c1dc34, type: 3}
   m_Name: HeroRikuto
   m_EditorClassIdentifier: 
-  heroName: Rikuto
-  heroDescription: 'Its Rikuto, he sleeps and is slow.
-
-    But his Skills are the
-    strongest.'
+  heroName:
+    m_TableReference:
+      m_TableCollectionName: GUID:2716aa3e59c5a0a46a248fb4ab91a76f
+    m_TableEntryReference:
+      m_KeyId: 278254025453568
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  heroDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:2716aa3e59c5a0a46a248fb4ab91a76f
+    m_TableEntryReference:
+      m_KeyId: 278356865593344
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   heroClass: 3
   portrait: {fileID: 21300000, guid: bcb2cf0e1feb6534993c6af6396cb65b, type: 3}
   prefab: {fileID: 2633605782419291739, guid: 89c626c4cf4e7d1408a6e95fb193164b, type: 3}
   maxHealth: 20
-  moveSpeed: 5
+  moveSpeed: 10
   attackSpeed: 1
   baseDamage: 10
   attackRange: 2
@@ -39,3 +52,6 @@ MonoBehaviour:
   secondaryAttackSFX: {fileID: 8300000, guid: 7bef7140492c8aa41952ff3558903240, type: 3}
   specialSkill1SFX: {fileID: 8300000, guid: 1950d4d0f04686b44817bb54270a6da7, type: 3}
   specialSkill2SFX: {fileID: 8300000, guid: 8d1a0b0cb6c7edc4b9e26b1db8ce9218, type: 3}
+  references:
+    version: 2
+    RefIds: []

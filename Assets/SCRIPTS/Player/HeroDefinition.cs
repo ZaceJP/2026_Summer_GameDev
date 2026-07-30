@@ -1,13 +1,12 @@
 using UnityEngine;
-
+using UnityEngine.Localization;
 
 [CreateAssetMenu(fileName = "NewHero", menuName = "Game/Hero Definition")]
 public class HeroDefinition : ScriptableObject
 {
     [Header("Identity")]
-    public string heroName;
-    [TextArea(3, 6)]
-    public string heroDescription;
+    public LocalizedString heroName;
+    public LocalizedString heroDescription;
     public HeroClass heroClass = HeroClass.Universal;
     public Sprite portrait;
     public GameObject prefab;

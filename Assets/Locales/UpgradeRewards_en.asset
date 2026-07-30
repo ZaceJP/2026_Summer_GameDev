@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UpgradeRewards_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a7e1dc9b7b1e370429d3e3cd9dca70e0, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5680672768
+    m_Localized: Power Strike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10780946432
+    m_Localized: Increase your attack damage by 25%.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13222031360
+    m_Localized: Power Strike+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15465984000
+    m_Localized: Increase your attack damage by 50%.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17911263232
+    m_Localized: Greater Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420539281408
+    m_Localized: Skills affect a wider area.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 477120442368
+    m_Localized: Heavy Swing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 527926046720
+    m_Localized: Increase melee attack range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 587501940736
+    m_Localized: Recovery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 609719169024
+    m_Localized: Restore 25% of your HP.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 727436505088
+    m_Localized: Long Reach
+    m_Metadata:
+      m_Items: []
+  - m_Id: 794167881728
+    m_Localized: Increase attack range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845510356992
+    m_Localized: Fleet Foot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 866012114944
+    m_Localized: Increase Movement Speed by 25%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 984643809280
+    m_Localized: Fleet Foot+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049617772544
+    m_Localized: Increase Movement Speed by 50%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1154517315584
+    m_Localized: Fire one additional projectile.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1133755510784
+    m_Localized: Split Shot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1268967288832
+    m_Localized: Split Shot+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1296716804096
+    m_Localized: Fire two additional projectiles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1368175161344
+    m_Localized: Swift Hands
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399393366016
+    m_Localized: Reduce skill cooldowns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1554217709568
+    m_Localized: Vitality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1602267656192
+    m_Localized: Vitality+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588128657408
+    m_Localized: Increase maximum HP by 5.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1622878466048
+    m_Localized: Increase maximum HP 10.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3195151069184
+    m_Localized: ShadowOrb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3195796992000
+    m_Localized: Fire one additional projectile.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

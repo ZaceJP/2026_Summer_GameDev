@@ -12,13 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d49dab58e3aa874e822904faa86642f, type: 3}
   m_Name: Heavy Swing
   m_EditorClassIdentifier: 
-  upgradeName: Heavy Swing
-  description: 'Your sword swings in a wider area.
-
-    +25% melee size'
+  upgradeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:a7e1dc9b7b1e370429d3e3cd9dca70e0
+    m_TableEntryReference:
+      m_KeyId: 477120442368
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:a7e1dc9b7b1e370429d3e3cd9dca70e0
+    m_TableEntryReference:
+      m_KeyId: 527926046720
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   icon: {fileID: 0}
   upgradeType: 14
   rarity: 0
   allowedClass: 1
   value: 25
   isPercentage: 1
+  references:
+    version: 2
+    RefIds: []

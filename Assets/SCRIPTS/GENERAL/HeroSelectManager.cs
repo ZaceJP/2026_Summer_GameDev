@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.Localization.Components;
 
 public class HeroSelectManager : MonoBehaviour
 {
@@ -118,8 +119,15 @@ public class HeroSelectManager : MonoBehaviour
         if (hero == null)
             return;
 
-        heroNameText.text = hero.heroName;
-        heroDescriptionText.text = hero.heroDescription;
+        hero.heroName.GetLocalizedStringAsync().Completed += handle =>
+        {
+            heroNameText.text = handle.Result;
+        };
+
+        hero.heroDescription.GetLocalizedStringAsync().Completed += handle =>
+        {
+            heroDescriptionText.text = handle.Result;
+        };
     }
 
     public void StartGame()

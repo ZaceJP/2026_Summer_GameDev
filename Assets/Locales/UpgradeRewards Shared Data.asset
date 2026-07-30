@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UpgradeRewards Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UpgradeRewards
+  m_TableCollectionNameGuidString: a7e1dc9b7b1e370429d3e3cd9dca70e0
+  m_Entries:
+  - m_Id: 5680672768
+    m_Key: DamageUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10780946432
+    m_Key: DamageUpDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13222031360
+    m_Key: DamageUp+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15465984000
+    m_Key: DamageUp+Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17911263232
+    m_Key: Greater Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420539281408
+    m_Key: Greater AreaDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 477120442368
+    m_Key: Heavy Swing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 527926046720
+    m_Key: Heavy SwingDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 587501940736
+    m_Key: HP Restore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 609719169024
+    m_Key: HP RestoreDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 727436505088
+    m_Key: Long Reach
+    m_Metadata:
+      m_Items: []
+  - m_Id: 794167881728
+    m_Key: Long ReachDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845510356992
+    m_Key: MoveSpeed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 866012114944
+    m_Key: MoveSpeedDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 984643809280
+    m_Key: MoveSpeed+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049617772544
+    m_Key: MoveSpeed+ Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1133755510784
+    m_Key: Split Shot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1154517315584
+    m_Key: Split ShotDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1268967288832
+    m_Key: Split Shot+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1296716804096
+    m_Key: Split Shot+ Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1368175161344
+    m_Key: Swift Hands
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399393366016
+    m_Key: Swift Hands Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1554217709568
+    m_Key: Vitality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588128657408
+    m_Key: VitalityDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1602267656192
+    m_Key: Vitality+
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1622878466048
+    m_Key: Vitality+Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3195151069184
+    m_Key: ShadowOrb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3195796992000
+    m_Key: ShadowOrbDesc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5117337644426068074
+  references:
+    version: 2
+    RefIds:
+    - rid: 5117337644426068074
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1784771263524

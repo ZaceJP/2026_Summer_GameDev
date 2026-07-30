@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Menu_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 2716aa3e59c5a0a46a248fb4ab91a76f, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 9556209664
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 654845685760
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 682553257984
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 723380613120
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 743471329280
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 774148468736
+    m_Localized: Keyboard and Mouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 810450169856
+    m_Localized: Controller
+    m_Metadata:
+      m_Items: []
+  - m_Id: 858164572160
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 954092498944
+    m_Localized: Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 988485791744
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1018496036864
+    m_Localized: Do you really want to end the Game?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1054307004416
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1101111242752
+    m_Localized: No, go back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 277093092438016
+    m_Localized: "Mage\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278056394043392
+    m_Localized: Master of the elements, wielding fire, ice, and lightning to devastate
+      enemies from afar. Freeze foes in place with powerful ice magic, leaving them
+      helpless before unleashing devastating elemental attacks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278122164924416
+    m_Localized: Warrior
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278192511791104
+    m_Localized: A fearless frontline fighter with immense health and a mighty blade,
+      built to cut through any foe. When enemies keep their distance, he can unleash
+      powerful ranged sword slashes to strike them from afar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278254025453568
+    m_Localized: Rikuto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278356865593344
+    m_Localized: "It's Rikuto... slow, sleepy, and never in a hurry. But don't let
+      that fool you\u2014he can knock enemies back, heal himself, and raise his guard
+      to withstand even the toughest battles. Sometimes, the strongest defense is
+      simply refusing to fall."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

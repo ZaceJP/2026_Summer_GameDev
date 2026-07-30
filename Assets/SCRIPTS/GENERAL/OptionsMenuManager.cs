@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.Localization.Settings;
 
 public class OptionsMenuManager : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class OptionsMenuManager : MonoBehaviour
     public Button backButton;
 
     public bool isUsingController { get; private set; } = false;
-    public string currentLanguage { get; private set; } = "English";
+    
 
     private void Start()
     {
@@ -62,10 +63,23 @@ public class OptionsMenuManager : MonoBehaviour
 
         controlTypeToggle.isOn = isUsingController;
 
-        List<string> languages = new List<string> { "English", "Deutsch", "Español", "Français", "日本語" };
+        // Populate language dropdown from Unity Localization
         languageDropdown.ClearOptions();
-        languageDropdown.AddOptions(languages);
-        languageDropdown.value = 0;
+
+        List<string> languageNames = new();
+
+        foreach (var locale in LocalizationSettings.AvailableLocales.Locales)
+        {
+            languageNames.Add(locale.LocaleName);
+        }
+
+        languageDropdown.AddOptions(languageNames);
+
+        languageDropdown.value =
+            LocalizationSettings.AvailableLocales.Locales.IndexOf(
+                LocalizationSettings.SelectedLocale);
+
+        languageDropdown.RefreshShownValue();
     }
 
     private void OnControlTypeChanged(bool value)
@@ -106,7 +120,15 @@ public class OptionsMenuManager : MonoBehaviour
     // ==========================================
     private void OnMusicVolumeChanged(float value) { if (MusicManager.Instance != null) MusicManager.Instance.SetMusicVolume(value); }
     private void OnSFXVolumeChanged(float value) { if (MusicManager.Instance != null) MusicManager.Instance.SetSFXVolume(value); }
-    private void OnLanguageChanged(int index) { currentLanguage = languageDropdown.options[index].text; PlayClickSound(); }
+    private void OnLanguageChanged(int index)
+    {
+        LocalizationSettings.SelectedLocale =
+            LocalizationSettings.AvailableLocales.Locales[index];
+        Debug.Log("Language changed to: " +
+     LocalizationSettings.SelectedLocale.LocaleName);
+
+        PlayClickSound();
+    }
     private void OnBackClicked() { if (titleScreenManager != null) titleScreenManager.OnBackPressedFromOptions(); }
     private void PlayClickSound() { if (MusicManager.Instance != null) MusicManager.Instance.PlaySFX(MusicManager.Instance.clickSound); }
 }
